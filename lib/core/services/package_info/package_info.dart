@@ -14,8 +14,22 @@ class PackageInfoGetter {
 
   static String get appName => _packageInfo?.appName ?? 'Unknown App';
 
-  static String get packageName => _packageInfo?.packageName ?? 'Unknown Package';
+  static String get packageName =>
+      _packageInfo?.packageName ?? 'Unknown Package';
+}
 
-  
+class PackageInfoService {
+  PackageInfoService._();
 
+  static final PackageInfoService instance = PackageInfoService._();
+
+  Future<void> init() => PackageInfoGetter.init();
+
+  String get version => PackageInfoGetter.version;
+
+  String get buildNumber => PackageInfoGetter.buildNumber;
+
+  String get appName => PackageInfoGetter.appName;
+
+  String get packageName => PackageInfoGetter.packageName;
 }

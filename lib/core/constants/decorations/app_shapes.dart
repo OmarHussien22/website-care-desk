@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/extensions/screen_spaces_extension.dart';
+import '../../services/utils/extensions/screen_spaces_extension.dart';
 
 class AppShapes {
   AppShapes._();

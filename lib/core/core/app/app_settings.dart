@@ -1,7 +1,7 @@
 
 
-import 'package:coursaty/src/core/constants/enums/app_mode.dart';
-import 'package:coursaty/src/features/quiz/domain/enitities/timer_type_enum.dart';
+import '../../../features/quiz/domain/enitities/timer_type_enum.dart';
+import '../../constants/enums/app_mode.dart';
 
 class AppSettings {
   static AppMode appMode = AppMode.prod;

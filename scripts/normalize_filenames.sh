@@ -8,6 +8,7 @@ find lib -depth | while read path; do
 
   if [[ "$base" != "$snake" ]]; then
     mv "$path" "$dir/$snake"
+    echo "Renamed $path to $dir/$snake ✅"
   fi
 done
 

@@ -5,7 +5,7 @@ import 'general_utils.dart';
 
 class DateUtilities {
   DateUtilities._();
-  static get instance => DateUtilities._();
+  static DateUtilities get instance => DateUtilities._();
 
   /// ------------------------------ date --------------------------------------
   static String timestampFormatToDate(String timeStamp) {
@@ -116,7 +116,7 @@ class DateUtilities {
     String minuteLeft = m.toString().length < 2 ? "0$m" : m.toString();
 
     String secondsLeft =
-        s.toString().length < 2 ? "0" + s.toString() : s.toString();
+        s.toString().length < 2 ? "0$s" : s.toString();
 
     String result = "$hourLeft:$minuteLeft:$secondsLeft";
     return result;

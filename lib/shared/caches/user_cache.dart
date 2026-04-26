@@ -1,0 +1,88 @@
+
+import '../../../core/services/storage/src/storage_constants.dart';
+import '../../../core/services/storage/storage_service.dart';
+import '../../../core/services/utils/general_utils.dart';
+import '../../../core/services/utils/utils.dart';
+import '../models/user.dart';
+
+
+class UserCache {
+  factory UserCache() => _instance;
+
+  UserCache._internal();
+
+  static final UserCache _instance = UserCache._internal();
+
+  static final _storage = StorageService<Map<String, dynamic>>();
+
+  Future<void> saveUser(User user) async {
+    printDM("User Save");
+    await _storage.save(
+      stgUserModel,
+      value: user.toJson(),
+    );
+    printDM("User Saved From Cache => ${user.toJson()}");
+  }
+
+  User? get data {
+    User? user;
+    try {
+      final data = _storage.read(
+        stgUserModel,
+      );
+      if (data == null) return null;
+      user = User.fromJson(data);
+      printDM("user => ${user.toString()}");
+    } catch (e) {
+      printDM("Error in getting user from cache => $e");
+    }
+    //return _defaultUser;
+    return user ?? _guestUser;
+  }
+
+  void logout() {
+    // _storage.clear;
+    _storage.delete(stgUserModel);
+    logoutUser();
+    printDM("User Deleted From Cache => ${data.toString()}");
+  }
+
+  User get _guestUser {
+    return User(
+      id: 0,
+      name: "Guest${Utils.randomNumber()}",
+      phone: "-",
+      parentName: 'Parent Name',
+      parentPhone: '-',
+      image:
+          "https://yt3.googleusercontent.com/uBxEzJWmk3pCDWu5glP-UeCAbTV8y71CGYlRiWOVs6j_EPQYPxj3Ke6YQdBjmpHy2rnbZ4AFUg=s900-c-k-c0x00ffffff-no-rj",
+      apiToken: 'token',
+      isVerified: 0,
+      // userAvatar: Avatar.example
+    );
+  }
+
+  final _loginStorage = StorageService<bool>();
+
+  bool get isAuth {
+    return true;
+    // final bool value =
+    //     _loginStorage.read("login", defaultValue: false) ?? false;
+    // // final value =true;
+    // printDM("value $value");
+    // return value;
+  }
+
+  void loginUser() {
+    _loginStorage.save("login", value: true);
+  }
+
+  void logoutUser() {
+    _loginStorage.delete("login");
+  }
+
+  bool isMine({required int userId}) {
+    final bool isMe = data?.id == userId;
+    return isMe;
+  }
+}

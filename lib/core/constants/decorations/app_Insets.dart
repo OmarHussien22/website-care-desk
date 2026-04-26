@@ -1,4 +1,4 @@
-import '../../utils/extensions/screen_spaces_extension.dart';
+import '../../services/utils/extensions/screen_spaces_extension.dart';
 import 'package:flutter/cupertino.dart';
 
 class AppInsets {
