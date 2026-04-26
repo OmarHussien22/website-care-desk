@@ -42,7 +42,7 @@ class DataInitial<T> extends DataState<T> {
 }
 
 class DataLoading<T> extends DataState<T> {
-  const DataLoading() : super();
+  const DataLoading({super.data});
 }
 
 class DataSearchLoading<T> extends DataState<T> {
