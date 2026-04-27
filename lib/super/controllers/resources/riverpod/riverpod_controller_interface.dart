@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/network_structure/resources/data_state/data_state.dart';
+import '../../../../src/core/network_structure/resources/data_state/data_state.dart';
 import '../../interface/master_controller.dart';
 
 abstract class RiverControllerInterface<T> extends ChangeNotifier

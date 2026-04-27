@@ -1,4 +1,4 @@
-import '../../../core/network_structure/resources/data_state/data_state.dart';
+import '../../../src/core/network_structure/resources/data_state/data_state.dart';
 
 mixin MasterController<T> {
   void emit(DataState<T> value);

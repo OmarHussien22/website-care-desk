@@ -1,0 +1,11 @@
+import 'package:coursaty/src/core/styles/colors/app_colors.dart';
+import 'package:coursaty/src/core/utils/extensions/screen_spaces_extension.dart';
+import 'package:coursaty/src/shared/presentation/widgets/builders/conditional_builder.dart';
+import 'package:coursaty/src/shared/presentation/widgets/general_widgets/text_fields/default/src/default/components/prefix/abstract/prefix_imp.dart';
+import 'package:coursaty/src/shared/presentation/widgets/general_widgets/text_fields/default/src/options/imports_options.dart';
+import 'package:flutter/material.dart';
+part 'prefix_none.dart';
+part 'prefix_with_icon_data.dart';
+part 'prefix_with_icon_image.dart';
+part 'prefix_with_text.dart';
+part 'prefix_with_widget.dart';

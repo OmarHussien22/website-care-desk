@@ -1,5 +1,5 @@
-import '../../../../../app_imports.dart';
-import '../../../../core/network_structure/resources/data_state/data_state.dart';
+import '../../../../packages_index.dart';
+import '../../../../src/core/network_structure/resources/data_state/data_state.dart';
 import '../../interface/master_controller.dart';
 
 abstract class GetControllerInterface<T> extends GetxController
