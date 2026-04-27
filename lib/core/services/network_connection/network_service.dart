@@ -2,9 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-
-import '../../Utils/general_utils.dart';
 import 'internet_connection_package/internet_connection_checker.dart';
+import '../../utils/general_utils.dart';
 
 class NetworkConnectionService {
   NetworkConnectionService._();
@@ -21,31 +20,27 @@ class NetworkConnectionService {
   Stream get myStream => _controller.stream;
   // 1.This calls for both methods to manually check the internet connection and listen for the connectivity stream.
   void initialise() async {
-    List<ConnectivityResult> result = await _connectivity.checkConnectivity();
-    _checkStatus(result);
-    _connectivity.onConnectivityChanged.listen((result) {
-      printDM("$result");
-      _checkStatus(result);
+    final results = await _connectivity.checkConnectivity();
+    _checkStatus(results[0]);
+    _connectivity.onConnectivityChanged.listen((results) {
+      printDM("${results[0]}");
+      _checkStatus(results[0]);
     });
   }
 
 // 2.This calls for both methods to manually check the internet connection and listen for the connectivity stream.
-  void _checkStatus( List<ConnectivityResult> connectivityResults) async {
+  void _checkStatus(ConnectivityResult connectivityResult) async {
     bool isOnline = false;
-    for (var connectivityResult in connectivityResults) {
-      try {
-        {
-          if (connectivityResult != ConnectivityResult.none) {
-            isOnline = await _internetConnectionChecker.hasConnection;
-          }
-        }
-        // final connectivityResult = await InternetAddress.lookup('example.com');
-        //  isOnline = connectivityResult.isNotEmpty && connectivityResult[0].rawAddress.isNotEmpty;
-      } on SocketException catch (_) {
-        isOnline = false;
+    try {
+      if (connectivityResult != ConnectivityResult.none) {
+        isOnline = await _internetConnectionChecker.hasConnection;
       }
-      _controller.sink.add({connectivityResult: isOnline});
+      // final connectivityResult = await InternetAddress.lookup('example.com');
+      //  isOnline = connectivityResult.isNotEmpty && connectivityResult[0].rawAddress.isNotEmpty;
+    } on SocketException catch (_) {
+      isOnline = false;
     }
+    _controller.sink.add({connectivityResult: isOnline});
   }
 
   void disposeStream() => _controller.close();

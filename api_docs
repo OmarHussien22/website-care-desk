@@ -1,0 +1,383 @@
+======================== Endpoints ========================
+
+* fetch_app_status => get
+
+    - input => {}
+
+    - output => {
+        - status
+        - message 
+        - data => {
+            - currency => String
+            - show_price => bool
+            - show_login_as_visitor => bool
+        }
+    }
+
+------------------------ requests --------------------------
+* fetch_all_requests => post , pagination
+  - input => {
+    - page => int
+    }
+
+  - output => {
+    - status
+    - message 
+    - data => List<RequestResource>
+    }
+
+* create_request.  => post
+    - input => {
+        - project_name => String
+        - project_type_id => int
+        - location => String.     // address
+        - scope_id => int
+        - description => String
+        - attachments => List<File>
+    }
+
+    - output => {
+        - status 
+        - message 
+        - data => RequestResource
+    }
+
+------------------------ requirements --------------------------
+* fetch_requirements_items => post
+    - input => {
+        - scope_id => int
+        - project_id => int
+    }
+
+    - output => {
+        - status 
+        - message 
+        - data => List<RequirementItemResource>
+    }
+
+* send_requirement_attachment => post
+    - input => {
+        - requirement_item_id => int
+        - attachment => File
+        - expire_date => String
+    }
+
+    - output => {
+        - status 
+        - message 
+    }
+* send_requirement_signature => post
+    - input => {
+        - requirement_item_id => int
+        - signature => File
+    }
+
+    - output => {
+        - status 
+        - message 
+    }
+
+------------------------ projects --------------------------
+* fetch_project_types => get
+
+  - input => {}
+
+  - output => {
+    - status 
+    - message 
+    - data => List<ProjectTypeResource>
+    }
+
+* fetch_project_scopes => get
+
+    - input => {}
+
+    - output => {
+        - status 
+        - message 
+        - data => List<ProjectScopeResource>
+    }
+------------------------ ask orbit (consultation) --------------------------
+* fetch_departments => get
+
+    - input => {}
+
+    - output => {
+        - status
+        - message 
+        - data => List<DepartmentResource>
+    }
+
+* fetch_branches => get
+
+    - input => {}
+
+    - output => {
+        - status
+        - message 
+        - data => List<BranchResource>
+    }
+
+* create_consultation => post 
+    - input => {
+        - department_id => int
+        - consulation_type_id => int (1 => online & 2 => offline)
+        - branch_id => int
+        - description => string
+    }
+
+    - output => {
+        - status
+        - message 
+        - data => ConsultationResource
+    }
+
+* change_consultation_status => post
+    - input => {
+        - consultation_id => int
+        - status => int.  (3 => cancelled & 4 => confirmed & 5 => finishied)
+    }
+
+    - output => {
+        - status
+        - message 
+        - data => ConsultationResource
+    }
+
+* fetch_all_consultations => post
+    - input => {
+        - status => int (1 => sent, 2 => pending, 3 => cancelled, 4 => confirmed, 5 => finishied)
+
+    }
+
+    - output => {
+        - status
+        - message 
+        - data => List<ConsultationResource>
+    }
+
+* toggle_meeting_summary_confirmation => post
+    - input => {
+        - consultation_id => int
+        - status => int. (1 => confirmed & 2 => rejected)
+    }
+
+    - output => {
+        - status
+        - message 
+    }
+
+------------------------ projects --------------------------
+* fetch_all_projects_details => get
+
+    - input => {}
+
+    - output => {
+        - status
+        - message 
+        - data => {
+            - highest_performing_project => ProjectResource
+            - on_going_projects_count => int
+            - paid_invoices_count => int
+            - outstanding_invoices_count => int
+            - all_required_documents_count => int
+            - all_invoices_count => int
+            - productivity_count => int
+            - next_due_date => String
+        }
+    }
+
+------------------------ productivity --------------------------
+* fetch_all_productivity => post
+
+    - input => {
+        - page => int
+    }
+
+    - output => {
+        - status
+        - message 
+        - data => List<ProductivityResource>
+    }
+
+* fetch_productivity_scope_permit => post
+
+    - input => {
+        - project_id => int
+        - scope_id => int
+    }
+
+    - output => {
+        - status
+        - message 
+        - data => List<ProductivityResource>
+    }
+------------------------ home --------------------------
+* fetch_home => get
+
+    - input => {}
+
+    - output => {
+        - status
+        - message 
+        - data => {
+            - banners => List<BannerResource>
+            - unread_notifications_count => int
+            - points_info => PointsInfoResource
+        }
+    }
+------------------------ documents --------------------------
+* add_document => post
+
+    - input => {
+        - project_id => int
+        - attachments => List // base64
+    }
+
+    - output => {
+        - status
+        - message 
+    }
+
+* fetch_all_documents => post
+
+    - input => {}
+
+    - output => {
+        - status
+        - message 
+        - data => List<DocumentResource>
+    }
+
+* fetch_document_details => post
+
+    - input => {
+        - project_id => int
+    }
+
+    - output => {
+        - status
+        - message 
+        - data => DocumentResource
+    }
+
+
+======================== resources ========================
+
+RequestResource {
+  - id => int
+  - projectTitle => String
+  - type => ProjectTypeResource
+  - projectCode => String
+  - date => String
+  - status => int  (1 => new && 2 => under_study && 3 => confirmed)
+  - projectEngineer => String
+  - phone => String
+  - email => String
+}
+ProjectTypeResource {
+    - id => int
+    - title => String
+}
+ProjectScopeResource {
+    - id => int
+    - title => String
+    - icon_url => String
+    - completed_requirements_count => int
+    - total_requirements_count => int
+}
+
+ConsultationResource {
+    - id => int
+    - department => departmentResource
+    - branch => BranchResource
+    - consulation_type => int (1 => online & 2 => offline)
+    - description => string
+    - status => int (1 => sent & 2 => pending & 3 => cancelled & 4 => confirmed & 5 => finishied)
+    - create_date => String
+    - meeting_date => String
+    - attention => AttentionResource
+    - meeting_link => String
+    - meeting_time => String
+    - meeting_summary => AttachmentResource. // only not null in finished
+}
+AttentionResource {
+    - id => int
+    - name => String
+}
+
+DepartmentResource {
+    - id => int
+    - title => String
+}
+BranchResource {
+    - id => int
+    - title => String
+}
+RequirementItemResource{
+    - id => int
+    - title => String
+    - sub_title => String
+    - uploading_date => String
+    - attachment_status => int. (1 => not_submitted & 2 => submitted & 3 => approved & 4 => rejected)
+}
+AttachmentResource{
+    - id => int
+    - title => String
+    - url => String
+}
+
+OfferResrouces{
+    - id => int
+    - title=> String
+    - project_type=> ProjectTypeResource
+    - project_code=> String
+    - last_update=> String
+    - project_status=> int  (6 => hold&& 4 => rejected && 8=> waiting l.p.o && 3 => approved)
+    - total=> String
+    - total_area=> String
+    - duration_by_weeks=> String
+    - discount=> String
+    - earning_points=> String
+    - address=> String
+    - attentions=> AttentionResource 
+    - total_offer=> String
+}
+
+ProductivityResource{
+    - id => int
+    - project => ProjectResource
+    - date => String
+    - duration => String
+    - total_area => String
+    - attention => AttentionResource
+    - design => ScopeProductivityResource
+    - authority => ScopeProductivityResource
+    - drafting => ScopeProductivityResource
+}
+
+ScopeProductivityResource{
+  - progress => int             // in case hte scope productivity presentage
+  - requirements_count => int   // In case the scope productivity Steps
+  - completed_count => int      // In case the scope productivity Steps
+}
+
+BannerResource {
+    - id => int
+    - image => String
+    - url => String
+}
+
+PointsInfoResource {
+    - points_balance => int
+    - total_points_value => double
+}
+
+DocumentResource{
+    - id => int
+    - title => String
+    - project_code => String
+    - description => String
+    - client_serial => String
+    - attachments => List<AttachmentResource>
+}

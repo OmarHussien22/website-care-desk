@@ -262,7 +262,7 @@ class InternetConnectionChecker {
   InternetConnectionStatus? _lastStatus;
   Timer? _timerHandle;
 
-  // manager for the exposed 'onStatusChange' Stream
+  // controller for the exposed 'onStatusChange' Stream
   final StreamController<InternetConnectionStatus> _statusController =
       StreamController<InternetConnectionStatus>.broadcast();
 
