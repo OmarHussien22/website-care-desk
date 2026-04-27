@@ -1,8 +1,6 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:equatable/equatable.dart';
 
-class UserInfo with EquatableMixin {
+class UserInfoModel with EquatableMixin {
   int? id;
   int? basicEducationTypeId;
   int? stageId;
@@ -23,7 +21,7 @@ class UserInfo with EquatableMixin {
   List<dynamic>? failingSubjects;
   String? examDate;
 
-  UserInfo({
+  UserInfoModel({
     this.id,
     this.basicEducationTypeId,
     this.stageId,
@@ -45,7 +43,7 @@ class UserInfo with EquatableMixin {
     this.examDate,
   });
 
-  UserInfo.fromJson(Map<String, dynamic> json) {
+  UserInfoModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
     basicEducationTypeId = json['basic_education_type_id'] ?? 0;
     stageId = json['stage_id'] ?? 0;
@@ -94,24 +92,24 @@ class UserInfo with EquatableMixin {
 
   @override
   List<Object?> get props => [
-        id,
-        basicEducationTypeId,
-        stageId,
-        yearId,
-        universityEducationTypeId,
-        universityId,
-        collegeId,
-        departmentId,
-        divisionId,
-        basicEducationTypeTitle,
-        stageTitle,
-        yearTitle,
-        universityEducationTypeTitle,
-        universityTitle,
-        collegeTitle,
-        departmentTitle,
-        divisionTitle,
-        failingSubjects,
-        examDate,
-      ];
+    id,
+    basicEducationTypeId,
+    stageId,
+    yearId,
+    universityEducationTypeId,
+    universityId,
+    collegeId,
+    departmentId,
+    divisionId,
+    basicEducationTypeTitle,
+    stageTitle,
+    yearTitle,
+    universityEducationTypeTitle,
+    universityTitle,
+    collegeTitle,
+    departmentTitle,
+    divisionTitle,
+    failingSubjects,
+    examDate,
+  ];
 }

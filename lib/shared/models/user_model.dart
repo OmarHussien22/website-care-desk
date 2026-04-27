@@ -1,19 +1,13 @@
 // ignore_for_file: must_be_immutable
 
-import '../../core/constants/strings/assets/app_images.dart';
-import '../../core/services/utils/extensions/json_parsing_extension.dart';
 import '../../core/services/utils/extensions/parser_extension.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../features/auth/core/enum/gender_enum.dart';
-import '../../features/auth/core/enum/gfi_subscription_status_enum.dart';
-import '../../features/auth/data/models/assest_model.dart';
-import '../../features/auth/data/models/avatar_model.dart';
-import '../../features/auth/data/models/user_info.dart';
-import '../../features/auth/domain/entities/avatar_entity.dart';
 import '../managers/approval_status_enum.dart';
+import 'user_info_model.dart';
 
-class User with EquatableMixin {
+class UserModel with EquatableMixin {
   int? id;
   String? message;
   String? name;
@@ -28,7 +22,7 @@ class User with EquatableMixin {
   int? categoryId;
   String? categoryTitle;
   int? isInfoComplete;
-  UserInfo? userInfo;
+  UserInfoModel? userInfo;
   int? type;
   bool? isBlocked;
   String? countryCode;
@@ -37,11 +31,8 @@ class User with EquatableMixin {
   int? isDeviceEmulator;
   int? isVisitor;
   ApprovalStatusEnum? approvalStatus;
-  Avatar? userAvatar;
-  AssestModel? assistant;
   GenderEnum? gender;
-  GfiSubscriptionStatusEnum? gfiStatus;
-  User({
+  UserModel({
     this.id,
     this.name,
     this.level,
@@ -65,23 +56,11 @@ class User with EquatableMixin {
     this.address,
     this.isVisitor,
     this.approvalStatus,
-    this.assistant,
-    this.userAvatar,
     this.gender,
-    this.gfiStatus,
   });
 
-  String get displayAvatarUrl => (userAvatar?.url?.isNotEmpty ?? false)
-      ? userAvatar!.url!
-      : AppImages.avatar4;
-
-  User.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     id = json.parse<int>('id');
-    userAvatar =
-        json['avatar'] != null ? AvatarModel.fromJson(json['avatar']) : null;
-    assistant = json['assistant'] != null
-        ? AssestModel.fromJson(json['assistant'])
-        : null;
     message = json.parse<String>('message');
     name = json.parse<String>('name');
     level = json.parse<String>('level');
@@ -98,15 +77,15 @@ class User with EquatableMixin {
     email = json.parse<String>('email');
     address = json.parse<String>('address');
     isInfoComplete = json.parse<int>('is_info_complete');
-    userInfo =
-        json['user_info'] != null ? UserInfo.fromJson(json['user_info']) : null;
+    userInfo = json['user_info'] != null
+        ? UserInfoModel.fromJson(json['user_info'])
+        : null;
     type = json.parse<int>('type');
     isBlocked = json.parse<bool>('is_blocked', defaultValue: false);
     isDeviceEmulator = json.parse<int>('is_device_emulator', defaultValue: 0);
     isVisitor = json.parse<int>('is_visitor', defaultValue: 0);
     approvalStatus = ApprovalStatusEnum.fromId(json.parse<int>('is_approved'));
     gender = GenderEnum.fromId(json.parse<int>('gender'));
-    gfiStatus = GfiSubscriptionStatusEnum.fromId(json.parseInt('gfi_status'));
   }
 
   Map<String, dynamic> toJson() {
@@ -133,42 +112,37 @@ class User with EquatableMixin {
       'email': email,
       'address': address,
       'is_visitor': isVisitor,
-      "avatar": userAvatar?.toJson(),
-      'assistant': assistant?.toJson(),
       'is_approved': approvalStatus?.id ?? ApprovalStatusEnum.pending.id,
       'gender': gender?.id ?? GenderEnum.male.id,
-      'gfi_status': gfiStatus?.id,
     };
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
-        id,
-        userAvatar,
-        message,
-        name,
-        level,
-        phone,
-        image,
-        parentName,
-        parentPhone,
-        apiToken,
-        verificationCode,
-        isVerified,
-        categoryId,
-        categoryTitle,
-        isInfoComplete,
-        userInfo,
-        type,
-        isDeviceEmulator,
-        countryCode,
-        email,
-        address,
-        isVisitor,
-      ];
+    id,
+    message,
+    name,
+    level,
+    phone,
+    image,
+    parentName,
+    parentPhone,
+    apiToken,
+    verificationCode,
+    isVerified,
+    categoryId,
+    categoryTitle,
+    isInfoComplete,
+    userInfo,
+    type,
+    isDeviceEmulator,
+    countryCode,
+    email,
+    address,
+    isVisitor,
+  ];
 
-  static User example = User(
+  static UserModel example = UserModel(
     id: 1,
     name: 'test',
     level: 'test',
@@ -185,7 +159,7 @@ class User with EquatableMixin {
     isInfoComplete: 1,
     type: 1,
     approvalStatus: ApprovalStatusEnum.approved,
-    userInfo: UserInfo(
+    userInfo: UserInfoModel(
       id: 1,
       basicEducationTypeId: 1,
       stageId: 1,
@@ -204,7 +178,6 @@ class User with EquatableMixin {
       departmentTitle: 'علوم حاسب',
       divisionTitle: 'الفرقة الثالثة',
     ),
-    userAvatar: Avatar.example,
     gender: GenderEnum.male,
   );
 }

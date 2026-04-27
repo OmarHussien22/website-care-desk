@@ -1,4 +1,4 @@
-import '../../../../shared/entities/pagination.dart';
+import '../../../../shared/models/pagination.dart';
 import '../errors/error_model.dart';
 
 abstract class DataState<T> {

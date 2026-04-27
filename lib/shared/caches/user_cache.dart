@@ -1,10 +1,8 @@
-
 import '../../../core/services/storage/src/storage_constants.dart';
 import '../../../core/services/storage/storage_service.dart';
 import '../../../core/services/utils/general_utils.dart';
 import '../../../core/services/utils/utils.dart';
-import '../models/user.dart';
-
+import '../models/user_model.dart';
 
 class UserCache {
   factory UserCache() => _instance;
@@ -15,23 +13,18 @@ class UserCache {
 
   static final _storage = StorageService<Map<String, dynamic>>();
 
-  Future<void> saveUser(User user) async {
+  Future<void> saveUser(UserModel user) async {
     printDM("User Save");
-    await _storage.save(
-      stgUserModel,
-      value: user.toJson(),
-    );
+    await _storage.save(stgUserModel, value: user.toJson());
     printDM("User Saved From Cache => ${user.toJson()}");
   }
 
-  User? get data {
-    User? user;
+  UserModel? get data {
+    UserModel? user;
     try {
-      final data = _storage.read(
-        stgUserModel,
-      );
+      final data = _storage.read(stgUserModel);
       if (data == null) return null;
-      user = User.fromJson(data);
+      user = UserModel.fromJson(data);
       printDM("user => ${user.toString()}");
     } catch (e) {
       printDM("Error in getting user from cache => $e");
@@ -47,8 +40,8 @@ class UserCache {
     printDM("User Deleted From Cache => ${data.toString()}");
   }
 
-  User get _guestUser {
-    return User(
+  UserModel get _guestUser {
+    return UserModel(
       id: 0,
       name: "Guest${Utils.randomNumber()}",
       phone: "-",
