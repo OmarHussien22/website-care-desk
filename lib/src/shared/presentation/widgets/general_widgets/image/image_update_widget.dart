@@ -4,7 +4,7 @@ import '../../../../../core/utils/extensions/basic_op_extensions.dart';
 import '../../../../../core/utils/extensions/screen_spaces_extension.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/styles/colors/app_colors.dart';
-import '../../../../managers/user_controller.dart';
+import '../../../controllers/user_controller.dart';
 import 'generic_image/generic_image.dart';
 
 class ImageUpdateWidget extends StatelessWidget {

@@ -133,8 +133,7 @@ class UserEntity extends Entity {
     };
   }
 
-  @override
-  List<UserEntity> get example => [
+  static List<UserEntity> get examples => [
         UserEntity(
           id: 1,
           name: "abdo",

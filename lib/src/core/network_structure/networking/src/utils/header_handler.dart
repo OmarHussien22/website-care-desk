@@ -1,7 +1,7 @@
 
 
 import '../../../../../shared/caches/user_cache.dart';
-import '../../../../../shared/managers/user_controller.dart';
+import '../../../../../shared/presentation/controllers/user_controller.dart';
 import '../../../../constants/strings/app_strings.dart';
 import '../../../../utils/general_utils.dart';
 import '../../../../utils/utils.dart';

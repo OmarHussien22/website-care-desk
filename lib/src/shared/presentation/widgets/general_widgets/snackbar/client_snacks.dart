@@ -3,6 +3,9 @@ import 'package:coursaty/src/core/utils/snack_utils/src/app_snacks.dart';
 
 import '../../../../../../packages_index.dart';
 import '../../../../../core/services/lang/translate_extention.dart';
+import '../../../../../core/styles/colors/app_colors.dart';
+import '../../../../../core/utils/extensions/screen_spaces_extension.dart';
+import '../text/custom_text_lib.dart';
 
 class ClientSnacks {
   ClientSnacks._();
@@ -97,5 +100,61 @@ class ClientSnacks {
 
   static void closeAllSnackbars() {
     Get.closeAllSnackbars();
+  }
+
+  static void appStyledSnack({
+    required String title,
+    String? body,
+    IconData? icon,
+    UtilState? state,
+    Color? iconColor,
+  }) => AppSnacks().showSnack(
+    content: Row(
+      children: [
+        Icon(
+          showIcon(state ?? UtilState.none),
+          color: showIconColor(state ?? UtilState.none),
+          size: 20,
+        ),
+        4.ESW(),
+        Expanded(
+          child: CustomText(
+            title.toTr(),
+            color: AppColors.get.green,
+            fontSize: 16,
+            fontWeight: FW.semiBold,
+          ),
+        ),
+      ],
+    ),
+    state: state ?? UtilState.none, // snackObject: SnackObject(
+    //   color: Color(0xff2F4858)
+    // ),
+  );
+
+  static IconData showIcon(UtilState utilState) {
+    switch (utilState) {
+      case UtilState.success:
+        return SnackConstants.successIcon;
+      case UtilState.error:
+        return SnackConstants.errorIcon;
+      case UtilState.warning:
+        return SnackConstants.warningIcon;
+      case UtilState.none:
+        return SnackConstants.noneIcon;
+    }
+  }
+
+  static Color showIconColor(UtilState utilState) {
+    switch (utilState) {
+      case UtilState.success:
+        return SnackConstants.successIconColor;
+      case UtilState.error:
+        return SnackConstants.errorIconColor;
+      case UtilState.warning:
+        return SnackConstants.warningIconColor;
+      case UtilState.none:
+        return SnackConstants.noneIconColor;
+    }
   }
 }

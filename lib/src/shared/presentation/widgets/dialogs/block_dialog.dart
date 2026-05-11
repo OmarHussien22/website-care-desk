@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../../../packages_index.dart';
 import '../../../../core/constants/strings/assets/app_images.dart';
 import '../../../caches/user_cache.dart';
-import '../../../managers/user_controller.dart';
+import '../../controllers/user_controller.dart';
 import '../general_widgets/image/generic_image/generic_image.dart';
 import '../general_widgets/text/custom_text_lib.dart';
 

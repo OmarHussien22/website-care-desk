@@ -1,11 +1,11 @@
 import 'package:coursaty/src/core/network_structure/resources/errors/error_model.dart';
 
-import '../../../../shared/domain/entities/pagination.dart';
+import '../../../../shared/domain/entities/pagination_entity.dart';
 
 abstract class DataState<T> {
   final T? data;
   final T? searchData;
-  final Pagination? pagination;
+  final PaginationEntity? pagination;
   final ErrorModel? error;
   final String? message;
   final bool? status;
@@ -30,7 +30,7 @@ class DataSuccess<T> extends DataState<T> {
     T? data, {
     String? message,
     T? searchData,
-    Pagination? pagination,
+    PaginationEntity? pagination,
     bool? status,
   }) : super(
          data: data,
