@@ -92,6 +92,6 @@ class CheckVerificationCodeController
     _timer.cancel();
     // codeController?.dispose();
     // errorController?.close();
-    super.dispose();
+    super.onClose();
   }
 }

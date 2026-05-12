@@ -9,4 +9,9 @@ abstract class GetControllerInterface<T> extends GetxController
     state = value;
     update();
   }
+
+  @override
+  void onClose() {
+    super.dispose();
+  }
 }
