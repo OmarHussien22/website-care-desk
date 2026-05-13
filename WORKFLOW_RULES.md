@@ -3,6 +3,10 @@
 > **Single source of truth for all AI agents.**
 > Antigravity, OpenCode, Claude, and Copilot all read this file.
 > Do NOT duplicate rules elsewhere — just reference this file.
+>
+> **Principles:** Non-negotiable project principles live in
+> `.specify/memory/constitution.md` and are authoritative for all work
+> (not only speckit commands). When in doubt, the constitution wins.
 
 ---
 
