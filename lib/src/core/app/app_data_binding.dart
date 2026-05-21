@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import '../../shared/managers/check_network_controller.dart';
-import '../../shared/managers/user_controller.dart';
+import '../../shared/presentation/controllers/check_network_controller.dart';
+import '../../shared/presentation/controllers/user_controller.dart';
 
 class AppDataBinding {
   AppDataBinding._();

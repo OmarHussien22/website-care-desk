@@ -1,9 +1,8 @@
 import 'dart:io';
 import 'dart:developer';
 
-
 import '../../../shared/data/models/pagination_model.dart';
-import '../../../shared/domain/entities/pagination.dart';
+import '../../../shared/domain/entities/pagination_entity.dart';
 import '../../app/app_settings.dart';
 import '../../constants/enums/app_mode.dart';
 import '../../utils/general_utils.dart';
@@ -14,10 +13,7 @@ import '../params/params.dart';
 import '../resources/data_state/data_state.dart';
 import '../resources/errors/error_model.dart';
 
-enum ResponseType {
-  withData,
-  withoutData,
-}
+enum ResponseType { withData, withoutData }
 
 abstract class RepoInterface<T> {
   /// return Your [Service] Class Instance In This Getter
@@ -53,8 +49,11 @@ abstract class RepoInterface<T> {
   //    return value;
   //  }
 
-  Future<DataState<T>>? sendFakeData(T? data,
-      {String? title, Params? params}) async {
+  Future<DataState<T>>? sendFakeData(
+    T? data, {
+    String? title,
+    Params? params,
+  }) async {
     log("serviceInstance => ${serviceInstance.runtimeType}");
     try {
       // AppDialogs.showLoadingDialog();
@@ -84,8 +83,11 @@ abstract class RepoInterface<T> {
       case AppMode.dev:
         return await sendFakeData(devData, params: params, title: 'Dev Data')!;
       case AppMode.test:
-        return await sendFakeData(testData,
-            params: params, title: 'Test Data')!;
+        return await sendFakeData(
+          testData,
+          params: params,
+          title: 'Test Data',
+        )!;
     }
   }
 
@@ -96,36 +98,45 @@ abstract class RepoInterface<T> {
       try {
         final httpResponse = await serviceInstance.applyService(params: params);
         hasPagination = serviceInstance.withPagination;
-        final checkStatusValue =
-            requireStatus ? (httpResponse.data['status'] ?? false) : true;
-        final checkResponse = ((httpResponse.statusCode == HttpStatus.ok) ||
+        final checkStatusValue = requireStatus
+            ? (httpResponse.data['status'] ?? false)
+            : true;
+        final checkResponse =
+            ((httpResponse.statusCode == HttpStatus.ok) ||
                 (httpResponse.statusCode == HttpStatus.created) ||
                 (httpResponse.statusCode == HttpStatus.accepted)) &&
             checkStatusValue;
         if (checkResponse) {
           if (responseType == ResponseType.withoutData) {
-            return DataSuccess<T>(onParse(httpResponse.data),
-                message: httpResponse.data['message']);
+            return DataSuccess<T>(
+              onParse(httpResponse.data),
+              message: httpResponse.data['message'],
+            );
           }
           if (httpResponse.data[dataTitle] != null) {
             try {
-              Pagination? pagination;
+              PaginationEntity? pagination;
               if (hasPagination) {
                 try {
                   if (httpResponse.data[dataTitle]['meta'] != null) {
                     pagination = PaginationModel.fromJson(
-                        httpResponse.data[dataTitle]['meta']);
+                      httpResponse.data[dataTitle]['meta'],
+                    );
                   }
                 } catch (e) {
                   printDM("Pagination Error => $e");
                 }
               }
-              T data = onParse(hasPagination
-                  ? httpResponse.data[dataTitle][dataPaginationTitle]
-                  : httpResponse.data[dataTitle]);
-              return DataSuccess<T>(data,
-                  message: httpResponse.data['message'],
-                  pagination: pagination);
+              T data = onParse(
+                hasPagination
+                    ? httpResponse.data[dataTitle][dataPaginationTitle]
+                    : httpResponse.data[dataTitle],
+              );
+              return DataSuccess<T>(
+                data,
+                message: httpResponse.data['message'],
+                pagination: pagination,
+              );
             } catch (e) {
               printDM('on Catch error from Repo =>  $e');
               return DataFailed(

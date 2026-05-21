@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../packages_index.dart';
 import '../../shared/caches/user_cache.dart';
-import '../../shared/managers/user_controller.dart';
+import '../../shared/presentation/controllers/user_controller.dart';
 import '../constants/enums/app_source.dart';
 import '../utils/general_utils.dart';
 

@@ -1,8 +1,8 @@
 import 'package:coursaty/src/core/utils/general_utils.dart';
 
-import '../../domain/entities/pagination.dart';
+import '../../domain/entities/pagination_entity.dart';
 
-class PaginationModel extends Pagination {
+class PaginationModel extends PaginationEntity {
   PaginationModel({
     int? next,
     int? prev,

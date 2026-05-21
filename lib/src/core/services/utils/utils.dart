@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import '../../../shared/domain/entities/language.dart';
+import '../../../shared/domain/entities/language_entity.dart';
 import '../../constants/decorations/app_shapes.dart';
 import '../lang_service/translate_extention.dart';
 import 'extensions/color_extension.dart';

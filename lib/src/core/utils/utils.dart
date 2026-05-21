@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:mime/mime.dart';
 
 //import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dar';
-import '../../shared/domain/entities/language.dart';
+import '../../shared/domain/entities/language_entity.dart';
 import '../services/lang/translate_extention.dart';
 import '../services/storage/src/storage_constants.dart';
 import 'general_utils.dart';
@@ -27,7 +27,7 @@ class Utils {
     _box.save(stgLang, value: id);
   }
 
-  static Language get cachedLanguageData {
+  static LanguageEntity get cachedLanguageData {
     printDM("language system : ${_box.read(stgLang)}");
     return LanguageData.languageData(_box.read(stgLang) ?? 1);
   }

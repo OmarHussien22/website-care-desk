@@ -7,22 +7,17 @@ mixin ApiNames {
   /// ----------------------------- Auth ------------------------------
   final uRLLogin = "${baseUrl}login";
   final uRLRegister = "${baseUrl}register";
-  final uRLVerifyPhone = "${baseUrl}verify_phone";
-  final uRLCheckPhone = "${baseUrl}check_phone";
+  final uRLCheckVerificationCode = '${baseUrl}check_verification_code';
+  final uRLResendVerificationCode = '${baseUrl}resend_verification_code';
   final uRLForgetPassword = "${baseUrl}forgot_password";
   final uRLResetPassword = "${baseUrl}reset_password";
   final uRLChangePassword = "${baseUrl}change_password";
-  final uRLCheckCode = "${baseUrl}check_code";
   final uRLLogout = '${baseUrl}logout';
   final uRLDeleteAccount = '${baseUrl}delete_account';
-  final uRLCheckApproved = "${baseUrl}check_approved";
-  final urlAddNationalAddress = "${baseUrl}create_or_update_national_address";
-  final urlAddOtherAddresses = "${baseUrl}update_or_create_another_address";
-  final uRLFetchNationalities = '${baseUrl}fetch_locations_without_children';
-  final uRLFetchCountries = '${baseUrl}fetch_locations_without_children';
-  final uRLFetchTermsAndConditions = '${baseUrl}fetch_terms_and_conditions';
-  final uRlUpdateProfile = '${baseUrl}update_profile';
-  final uRlCompleteData = '${baseUrl}complete_data';
-  final uRlChangePhone = '${baseUrl}change_phone';
-  final uRlDeleteAnotherAddress = '${baseUrl}delete_another_address';
+  final uRLSetUserEducationInfo = '${baseUrl}set_user_education_info';
+  final uRLFetchEducationTypes = '${baseUrl}fetch_education_types';
+  final uRLSetParentData = '${baseUrl}set_parent_data';
+  final uRLCheckInvitationCode = '${baseUrl}check_invitation_code';
+
 }
+

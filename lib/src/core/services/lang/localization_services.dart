@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../../shared/domain/entities/language.dart';
+import '../../../shared/domain/entities/language_entity.dart';
 import '../utils/general_utils.dart';
 import '../utils/utils.dart';
 import '../storage/src/storage_constants.dart';
