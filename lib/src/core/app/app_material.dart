@@ -1,4 +1,5 @@
 import '../constants/strings/app_strings.dart';
+import '../routers/app_router.dart';
 import '../styles/themes/imports_themes.dart';
 import '../utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class AppMaterial extends StatelessWidget {
       locale: Utils.cachedLocale,
       title: AppStrings.appName,
       theme: ThemeManager.light,
+      getPages: AppRouter.pages,
       home: home,
     );
   }

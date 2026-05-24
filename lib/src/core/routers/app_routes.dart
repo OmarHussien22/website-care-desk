@@ -30,4 +30,7 @@ class AppRoutes {
 
   /// --------------------- home -------------------------------
   static const base = "/base";
+
+  /// --------------------- landing -------------------------------
+  static const landing = "/landing";
 }

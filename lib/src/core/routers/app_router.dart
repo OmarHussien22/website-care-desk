@@ -1,3 +1,5 @@
+import 'package:coursaty/src/landing/presentation/pages/landing_binding.dart';
+import 'package:coursaty/src/landing/presentation/pages/landing_page.dart';
 import 'package:get/get.dart';
 import 'app_routes.dart';
 import 'route_args.dart';
@@ -5,6 +7,12 @@ import 'route_args.dart';
 class AppRouter {
   // All pages registered here
   static final List<GetPage<dynamic>> pages = <GetPage<dynamic>>[
+    GetPage(
+      name: AppRoutes.landing,
+      page: () => const LandingPage(),
+      binding: LandingBinding(),
+      transition: Transition.fadeIn,
+    ),
     // GetPage(
     //   name: AppRoutes.splash,
     //   page: () => const SplashPage(),

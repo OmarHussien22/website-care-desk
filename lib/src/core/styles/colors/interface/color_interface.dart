@@ -226,6 +226,16 @@ abstract class ColorInterface {
 
 
 
+  // ---------------------- Landing-specific tokens ----------------------
+  Color get surfaceMuted;
+  Color get surfaceElevated;
+  Color get borderSubtle;
+  Color get accentGradientStart;
+  Color get accentGradientEnd;
+  Color get textPrimary;
+  Color get textSecondary;
+  Color get textInverse;
+
   LinearGradient get defaultLinearColor => LinearGradient(
     begin: Alignment.bottomLeft,
     end: Alignment.topRight,
