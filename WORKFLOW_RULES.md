@@ -210,7 +210,23 @@ class FooController extends GetControllerInterface<FooEntity> {
 
 ---
 
-## 7. Page Pattern
+## 7. GetBuilder Performance
+
+Avoid rebuilding full pages.
+
+Prefer isolated rebuilds:
+
+```dart
+GetBuilder<FooController>(
+  id: 'submitButton',
+  builder: (_) => ButtonDefault(
+    onPressed: controller.doAction,
+  ),
+)
+
+----
+
+## 8. Page Pattern
 
 ```dart
 class FooPage extends GetView<FooController> {
@@ -247,7 +263,7 @@ class FooPage extends GetView<FooController> {
 
 ---
 
-## 8. Routing
+## 9. Routing
 
 ```dart
 // Navigate forward
@@ -264,7 +280,7 @@ final args = Get.arguments as VerifyCodeArgs;  // receive in page
 
 ---
 
-## 9. Cross-Screen Transient State
+## 10. Cross-Screen Transient State
 
 Use a singleton builder (like `PhoneDataBuilder`) for data that must survive multiple navigations:
 ```dart
@@ -284,7 +300,7 @@ class PhoneDataBuilder {
 
 ---
 
-## 10. Shared Utility Reference
+## 11. Shared Utility Reference
 
 | Need | Use |
 |---|---|
@@ -304,7 +320,7 @@ class PhoneDataBuilder {
 
 ---
 
-## 11. UI / Styling
+## 12. UI / Styling
 
 - **Colors:** `AppColors.get.*` — `LightColor()` / `DarkColor()` implement `ColorInterface`
 - **Text weights:** use `FW.*` enum (`FW.bold`, `FW.medium`, `FW.semiBold`)
@@ -314,7 +330,7 @@ class PhoneDataBuilder {
 
 ---
 
-## 12. App Modes
+## 13. App Modes
 
 | Mode | Behaviour |
 |---|---|
@@ -326,7 +342,7 @@ Always provide `testData` in every new `Repository`.
 
 ---
 
-## 13. Commands Reference
+## 14. Commands Reference
 
 ```bash
 flutter analyze .                                          # lint
@@ -337,7 +353,7 @@ flutter pub add <package>                                 # add dep
 
 ---
 
-## 14. Prohibited → Correct Patterns
+## 15. Prohibited → Correct Patterns
 
 | ❌ Prohibited | ✅ Correct |
 |---|---|
@@ -354,7 +370,7 @@ flutter pub add <package>                                 # add dep
 
 ---
 
-## 15. Pre-Commit Quality Checklist
+## 16. Pre-Commit Quality Checklist
 
 - [ ] `flutter analyze .` — zero errors
 - [ ] No `print()` in any modified file
