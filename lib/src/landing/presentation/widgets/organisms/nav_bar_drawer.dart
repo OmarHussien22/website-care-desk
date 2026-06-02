@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 const List<({String labelKey, String sectionId})> _drawerLinks = [
+  (labelKey: 'nav.services', sectionId: 'services'),
   (labelKey: 'nav.features', sectionId: 'features'),
   (labelKey: 'nav.how_it_works', sectionId: 'how-it-works'),
   (labelKey: 'nav.for_clinicians', sectionId: 'for-clinicians'),

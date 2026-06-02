@@ -14,6 +14,7 @@ import 'package:url_launcher/url_launcher.dart';
 const double _navBarHeight = 64.0;
 
 const List<({String labelKey, String sectionId})> _navLinks = [
+  (labelKey: 'nav.services', sectionId: 'services'),
   (labelKey: 'nav.features', sectionId: 'features'),
   (labelKey: 'nav.how_it_works', sectionId: 'how-it-works'),
   (labelKey: 'nav.for_clinicians', sectionId: 'for-clinicians'),

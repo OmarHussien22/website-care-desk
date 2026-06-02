@@ -44,17 +44,17 @@ class _PlaceholderSectionState extends State<PlaceholderSection> {
     super.dispose();
   }
 
-  /// Section indices match §8 of phase_2.md.
+  /// Section indices match §6 of phase_3.md (stats=1, services=2 are built).
   static const _sectionIndex = <String, int>{
-    'logos': 1,
-    'features': 2,
-    'how-it-works': 3,
-    'for-clinicians': 4,
-    'for-patients': 5,
-    'pricing': 6,
-    'testimonials': 7,
-    'faq': 8,
-    'cta': 9,
+    'logos': 3,
+    'features': 4,
+    'how-it-works': 5,
+    'for-clinicians': 6,
+    'for-patients': 7,
+    'pricing': 8,
+    'testimonials': 9,
+    'faq': 10,
+    'cta': 11,
   };
 
   static const _sectionTitle = <String, String>{

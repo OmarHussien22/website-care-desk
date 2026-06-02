@@ -13,6 +13,37 @@ const Map<String, String> landingEnUS = {
   'nav.menu.open': 'Open menu',
   'nav.menu.close': 'Close menu',
   'nav.language.switch': 'Switch language',
+  'nav.services': 'Services',
+
+  // ── Statistics ──────────────────────────────────────────────────────────
+  'stats.eyebrow': 'Trusted across the region',
+  'stats.doctors': 'Doctors',
+  'stats.patients': 'Patients',
+  'stats.centers': 'Centers',
+  'stats.appointments': 'Appointments',
+
+  // ── Services ──────────────────────────────────────────────────────────────
+  'services.eyebrow': 'What we offer',
+  'services.title': 'Everything your practice needs',
+  'services.subtitle': 'One platform — clinical, operational, and commercial.',
+  'services.doctor_mgmt.title': 'Doctor Management',
+  'services.doctor_mgmt.desc':
+      'Onboard, schedule, and manage your clinical team in one place.',
+  'services.appointments.title': 'Appointment System',
+  'services.appointments.desc':
+      'Online booking, reminders, and a live calendar across centers.',
+  'services.marketplace.title': 'Marketplace',
+  'services.marketplace.desc':
+      'List products and services patients can discover and buy.',
+  'services.discounts.title': 'Discounts',
+  'services.discounts.desc':
+      'Create offers and promo codes to grow patient loyalty.',
+  'services.analytics.title': 'Analytics',
+  'services.analytics.desc':
+      'Track revenue, bookings, and performance in real time.',
+  'services.multicenter.title': 'Multi-center Support',
+  'services.multicenter.desc':
+      'Run multiple branches from a single unified dashboard.',
 
   // ── Hero ──────────────────────────────────────────────────────────────────
   'hero.eyebrow': 'Healthcare, reimagined',
