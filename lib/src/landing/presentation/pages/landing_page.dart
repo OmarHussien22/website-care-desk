@@ -1,11 +1,12 @@
 import 'package:coursaty/src/landing/core/animations/fade_in_on_scroll.dart';
 import 'package:coursaty/src/landing/core/scrolling/landing_scroll_controller.dart';
 import 'package:coursaty/src/landing/core/theme/landing_colors.dart';
-import 'package:coursaty/src/landing/presentation/widgets/layout/sliver_section_wrapper.dart';
+import 'package:coursaty/src/landing/presentation/sections/footer/footer_section.dart';
+import 'package:coursaty/src/landing/presentation/sections/hero/hero_section.dart';
+import 'package:coursaty/src/landing/presentation/sections/placeholders/placeholder_section.dart';
+import 'package:coursaty/src/landing/presentation/widgets/organisms/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:coursaty/src/landing/presentation/widgets/layout/section_wrapper.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -16,67 +17,106 @@ class LandingPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: LandingColors.surfaceElevated,
-      body: CustomScrollView(
-        controller: ctrl.scrollController,
-        slivers: [
-          SliverSectionWrapper(
-            background: LandingColors.surfaceElevated,
-            animationWrapper: (child) => FadeInOnScroll(child: child),
-            child: _PlaceholderSection(sectionId: 'placeholder'),
+      body: Stack(
+        children: [
+          // ── Scrollable content ────────────────────────────────────────────
+          CustomScrollView(
+            controller: ctrl.scrollController,
+            slivers: [
+              // § 0 — Hero
+              const SliverToBoxAdapter(child: HeroSection()),
+
+              // § 1 — Logos strip (Phase 3)
+              SliverToBoxAdapter(
+                child: FadeInOnScroll(
+                  child: PlaceholderSection(
+                    sectionId: 'logos',
+                    background: LandingColors.surfaceMuted,
+                  ),
+                ),
+              ),
+
+              // § 2 — Features (Phase 3)
+              SliverToBoxAdapter(
+                child: FadeInOnScroll(
+                  child: const PlaceholderSection(sectionId: 'features'),
+                ),
+              ),
+
+              // § 3 — How it works (Phase 3)
+              SliverToBoxAdapter(
+                child: FadeInOnScroll(
+                  child: PlaceholderSection(
+                    sectionId: 'how-it-works',
+                    background: LandingColors.surfaceMuted,
+                  ),
+                ),
+              ),
+
+              // § 4 — For clinicians (Phase 3)
+              SliverToBoxAdapter(
+                child: FadeInOnScroll(
+                  child: const PlaceholderSection(sectionId: 'for-clinicians'),
+                ),
+              ),
+
+              // § 5 — For patients (Phase 3)
+              SliverToBoxAdapter(
+                child: FadeInOnScroll(
+                  child: PlaceholderSection(
+                    sectionId: 'for-patients',
+                    background: LandingColors.surfaceMuted,
+                  ),
+                ),
+              ),
+
+              // § 6 — Pricing (Phase 4)
+              SliverToBoxAdapter(
+                child: FadeInOnScroll(
+                  child: const PlaceholderSection(sectionId: 'pricing'),
+                ),
+              ),
+
+              // § 7 — Testimonials (Phase 4)
+              SliverToBoxAdapter(
+                child: FadeInOnScroll(
+                  child: PlaceholderSection(
+                    sectionId: 'testimonials',
+                    background: LandingColors.surfaceMuted,
+                  ),
+                ),
+              ),
+
+              // § 8 — FAQ (Phase 4)
+              SliverToBoxAdapter(
+                child: FadeInOnScroll(
+                  child: const PlaceholderSection(sectionId: 'faq'),
+                ),
+              ),
+
+              // § 9 — CTA (Phase 4)
+              SliverToBoxAdapter(
+                child: FadeInOnScroll(
+                  child: PlaceholderSection(
+                    sectionId: 'cta',
+                    background: LandingColors.surfaceMuted,
+                  ),
+                ),
+              ),
+
+              // § 10 — Footer
+              const SliverToBoxAdapter(child: FooterSection()),
+            ],
+          ),
+
+          // ── Sticky NavBar overlay ─────────────────────────────────────────
+          const Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: LandingNavBar(),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _PlaceholderSection extends StatefulWidget {
-  const _PlaceholderSection({required this.sectionId});
-
-  final String sectionId;
-
-  @override
-  State<_PlaceholderSection> createState() => _PlaceholderSectionState();
-}
-
-class _PlaceholderSectionState extends State<_PlaceholderSection> {
-  final GlobalKey _key = GlobalKey();
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        Get.find<LandingScrollController>().registerSection(widget.sectionId, _key);
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    Get.find<LandingScrollController>().unregisterSection(widget.sectionId);
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      key: _key,
-      height: 300,
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.construction, size: 48, color: Colors.grey),
-            const SizedBox(height: 16),
-            Text(
-              'Phase 1 — Foundation Scaffold',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 8),
-            const Text('Sections will be added here in Phase 2+.'),
-          ],
-        ),
       ),
     );
   }

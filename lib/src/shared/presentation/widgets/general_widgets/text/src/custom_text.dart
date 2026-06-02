@@ -20,6 +20,12 @@ class CustomText extends StatelessWidget {
   final FW fontWeight;
   final TextRole? role;
 
+  /// When true (default) the raw [fontSize] is scaled via screenutil (`.sp`).
+  /// Pass `false` to use [fontSize] as a fixed logical-px value — used by the
+  /// landing page, whose typography is already breakpoint-responsive and must
+  /// not be double-scaled. Ignored when [role] is set (roles never scale).
+  final bool scaleFont;
+
   const CustomText(
     this.label, {
     Key? key,
@@ -39,6 +45,7 @@ class CustomText extends StatelessWidget {
     this.backgroundColor,
     this.letterSpacing,
     this.role,
+    this.scaleFont = true,
   }) : super(key: key);
 
 //</editor-fold>
@@ -154,7 +161,7 @@ class CustomText extends StatelessWidget {
       baseStyle = Theme.of(context).textTheme.titleMedium!.copyWith(
             color: color ?? AppColors.get.titleText,
             backgroundColor: backgroundColor,
-            fontSize: (fontSize ?? 16).toFS(),
+            fontSize: scaleFont ? (fontSize ?? 16).toFS() : (fontSize ?? 16),
             fontWeight: customTextFw(fontWeight),
             decoration: customTextDecoration(decoration),
             height: textHeight,

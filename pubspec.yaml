@@ -78,6 +78,9 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/images/brand/
+    - assets/images/hero/
+    - assets/images/social/
     - assets/fonts/uRW/
     - assets/fonts/montserrat/
 

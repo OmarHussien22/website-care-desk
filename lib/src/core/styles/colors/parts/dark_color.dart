@@ -43,21 +43,23 @@ class DarkColor extends ColorInterface {
   @override
   Color get appBarColorInner => Colors.white;
 
-  // Landing tokens — dark
+  // Landing tokens — dark (§9.2 palette)
   @override
-  Color get surfaceMuted => const Color(0xff061349);
+  Color get surfaceMuted => const Color(0xff0F172A);
   @override
-  Color get surfaceElevated => const Color(0xff101C43);
+  Color get surfaceElevated => const Color(0xff1E293B);
   @override
-  Color get borderSubtle => const Color(0xff1E2D5A);
+  Color get borderSubtle => const Color(0xff1E293B);
   @override
-  Color get accentGradientStart => const Color(0xff42A5F5);
+  Color get accentGradientStart => const Color(0xff0EA5E9);
   @override
-  Color get accentGradientEnd => const Color(0xff1976D2);
+  Color get accentGradientEnd => const Color(0xff22D3EE);
   @override
-  Color get textPrimary => Colors.white;
+  Color get textPrimary => const Color(0xffF8FAFC);
   @override
-  Color get textSecondary => const Color(0xffACB1C0);
+  Color get textSecondary => const Color(0xff94A3B8);
   @override
-  Color get textInverse => const Color(0xff0B1741);
+  Color get textInverse => const Color(0xff0F172A);
+  @override
+  Color get success => const Color(0xff10B981);
 }

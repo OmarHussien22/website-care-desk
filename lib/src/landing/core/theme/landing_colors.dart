@@ -18,4 +18,13 @@ abstract final class LandingColors {
         end: Alignment.bottomRight,
         colors: [accentGradientStart, accentGradientEnd],
       );
+
+  /// Solid CTA fill — sky-600, contrasts against gradient and white surfaces.
+  static const Color accent = Color(0xFF0284C7);
+
+  /// CTA hover — sky-700.
+  static const Color accentHover = Color(0xFF0369A1);
+
+  /// Emerald green for positive indicators and emphasized headline text.
+  static Color get success => AppColors.get.success;
 }

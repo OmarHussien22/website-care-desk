@@ -22,6 +22,7 @@ class SectionWrapper extends StatelessWidget {
     this.decoration,
     this.animationWrapper,
     this.verticalPaddingOverride,
+    this.topPaddingExtra = 0.0,
   }) : assert(
           background == null || decoration == null,
           'Provide either background or decoration, not both.',
@@ -45,6 +46,9 @@ class SectionWrapper extends StatelessWidget {
   /// Override vertical padding (defaults to AppSpacing.section).
   final Responsive<double>? verticalPaddingOverride;
 
+  /// Extra pixels added to the top padding only (e.g. navbar height clearance).
+  final double topPaddingExtra;
+
   @override
   Widget build(BuildContext context) {
     final size = ScreenSizeX.of(context);
@@ -65,7 +69,10 @@ class SectionWrapper extends StatelessWidget {
       width: double.infinity,
       color: decoration == null ? background : null,
       decoration: decoration,
-      padding: EdgeInsets.symmetric(vertical: vPad),
+      padding: EdgeInsets.only(
+        top: vPad + topPaddingExtra,
+        bottom: vPad,
+      ),
       child: MaxContentWidth(child: wrappedContent),
     );
 

@@ -45,21 +45,23 @@ class LightColor extends ColorInterface {
   @override
   Color get appBarColorInner => Colors.black87;
 
-  // Landing tokens — light
+  // Landing tokens — light (§9 palette)
   @override
-  Color get surfaceMuted => const Color(0xffF8F9FB);
+  Color get surfaceMuted => const Color(0xffF8FAFC);
   @override
   Color get surfaceElevated => Colors.white;
   @override
-  Color get borderSubtle => const Color(0xffE8ECF0);
+  Color get borderSubtle => const Color(0xffE2E8F0);
   @override
-  Color get accentGradientStart => const Color(0xff1976D2);
+  Color get accentGradientStart => const Color(0xff0EA5E9);
   @override
-  Color get accentGradientEnd => const Color(0xff0D47A1);
+  Color get accentGradientEnd => const Color(0xff22D3EE);
   @override
-  Color get textPrimary => const Color(0xff0B1741);
+  Color get textPrimary => const Color(0xff0F172A);
   @override
-  Color get textSecondary => const Color(0xff47586E);
+  Color get textSecondary => const Color(0xff475569);
   @override
   Color get textInverse => Colors.white;
+  @override
+  Color get success => const Color(0xff10B981);
 }

@@ -1,7 +1,9 @@
 import '../constants/strings/app_strings.dart';
+import '../routers/app_routes.dart';
 import '../routers/app_router.dart';
 import '../styles/themes/imports_themes.dart';
 import '../utils/utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,9 +11,7 @@ import '../services/lang/localization_services.dart';
 import 'navigator_observer.dart';
 
 class AppMaterial extends StatelessWidget {
-  final Widget home;
-
-  const AppMaterial({super.key, required this.home});
+  const AppMaterial({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +19,6 @@ class AppMaterial extends StatelessWidget {
       navigatorObservers: [MyRouteObserver()],
       debugShowCheckedModeBanner: false,
       navigatorKey: Get.key,
-      // scaffoldMessengerKey: Snap.messengerKey,
-      // onGenerateRoute: RouterGenerator().goRoutes,
       defaultTransition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 200),
       translations: LocalizationServices.instance,
@@ -28,7 +26,7 @@ class AppMaterial extends StatelessWidget {
       title: AppStrings.appName,
       theme: ThemeManager.light,
       getPages: AppRouter.pages,
-      home: home,
+      initialRoute: kIsWeb ? AppRoutes.landingRoot : AppRoutes.landing,
     );
   }
 }
