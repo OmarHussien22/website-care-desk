@@ -54,14 +54,14 @@ class _NavLinkState extends State<NavLink> {
             behavior: HitTestBehavior.opaque,
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 160),
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: isActive
                   ? BoxDecoration(
                       color: widget.textColor != null
                           ? Colors.white.withValues(alpha: 0.18)
-                          : LandingColors.accentGradientStart
-                              .withValues(alpha: 0.12),
+                          : LandingColors.accentGradientStart.withValues(
+                              alpha: 0.12,
+                            ),
                       borderRadius: BorderRadius.circular(999),
                     )
                   : null,

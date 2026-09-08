@@ -20,7 +20,8 @@ class NavBarController extends GetxController {
   }
 
   void _onScroll() {
-    final past = _scrollController.hasClients &&
+    final past =
+        _scrollController.hasClients &&
         _scrollController.offset > _scrollThreshold;
     if (past != scrolledPastThreshold.value) {
       scrolledPastThreshold.value = past;

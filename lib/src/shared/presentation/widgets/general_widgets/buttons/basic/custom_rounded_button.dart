@@ -226,7 +226,7 @@ class _IconRoundedChild extends StatelessWidget {
               textAlign: TextAlign.start,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: color ?? AppColors.get.white,
-                fontFamily: AppStrings.fontFamilyUrw,
+                fontFamily: AppStrings.fontFamilyMontserrat,
                 fontWeight: FontWeight.w700,
               ),
             ),

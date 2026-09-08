@@ -22,9 +22,6 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO(phase2): Apply AppTextStyles.of(context, TextRole.button) and full variant styling.
-    return ElevatedButton(
-      onPressed: onPressed,
-      child: Text(label),
-    );
+    return ElevatedButton(onPressed: onPressed, child: Text(label));
   }
 }

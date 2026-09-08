@@ -166,7 +166,7 @@ class CustomText extends StatelessWidget {
             decoration: customTextDecoration(decoration),
             height: textHeight,
             letterSpacing: letterSpacing,
-            fontFamily: fontFamily ?? AppStrings.fontFamilyUrw,
+            fontFamily: fontFamily ?? AppStrings.fontFamilyMontserrat,
             shadows: textShadow
                 ? [
                     Shadow(

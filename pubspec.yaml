@@ -85,7 +85,7 @@ flutter:
     - assets/fonts/montserrat/
 
   fonts:
-    - family: uRW
+    - family: URW
       fonts:
         - asset: assets/fonts/uRW/uRW_Thin.ttf
           weight: 100

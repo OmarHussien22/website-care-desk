@@ -10,7 +10,7 @@ final ThemeData _lightTheme = _defaultTheme.copyWith(
     errorStyle: TextStyle(
       color: AppColors.get.error,
       fontSize: 12.toFS(),
-      fontFamily: AppStrings.fontFamilyUrw,
+      fontFamily: AppStrings.fontFamilyMontserrat,
     ),
     fillColor: AppColors.get.tTFActiveBackGround,
     border: OutlineInputBorder(

@@ -79,10 +79,7 @@ class _FadeInOnScrollState extends State<FadeInOnScroll>
       onVisibilityChanged: _onVisibilityChanged,
       child: FadeTransition(
         opacity: _opacity,
-        child: SlideTransition(
-          position: _slide,
-          child: widget.child,
-        ),
+        child: SlideTransition(position: _slide, child: widget.child),
       ),
     );
   }

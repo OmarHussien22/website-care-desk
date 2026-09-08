@@ -45,21 +45,22 @@ class LightColor extends ColorInterface {
   @override
   Color get appBarColorInner => Colors.black87;
 
-  // Landing tokens — light (§9 palette)
+  // Landing tokens — light (brand palette: primary #0F3A52 · secondary #68848F · bg #F8FAFC)
   @override
   Color get surfaceMuted => const Color(0xffF8FAFC);
   @override
   Color get surfaceElevated => Colors.white;
   @override
   Color get borderSubtle => const Color(0xffE2E8F0);
+  // Brand gradient: deep teal primary → brighter teal tint for premium depth.
   @override
-  Color get accentGradientStart => const Color(0xff0EA5E9);
+  Color get accentGradientStart => MedDeskConfig.primaryColor;
   @override
-  Color get accentGradientEnd => const Color(0xff22D3EE);
+  Color get accentGradientEnd => MedDeskConfig.accentColor;
   @override
-  Color get textPrimary => const Color(0xff0F172A);
+  Color get textPrimary => const Color(0xff0F2733);
   @override
-  Color get textSecondary => const Color(0xff475569);
+  Color get textSecondary => const Color(0xff5A727D);
   @override
   Color get textInverse => Colors.white;
   @override

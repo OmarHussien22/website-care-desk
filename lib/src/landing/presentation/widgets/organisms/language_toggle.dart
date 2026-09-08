@@ -31,8 +31,9 @@ class _LanguageToggleState extends State<LanguageToggle> {
     final isArabic = LocalizationServices.currentLanguageKey == 1;
     final targetLabel = isArabic ? 'English' : 'العربية';
 
-    final Color fg =
-        widget.onSurface ? LandingColors.textPrimary : Colors.white;
+    final Color fg = widget.onSurface
+        ? LandingColors.textPrimary
+        : Colors.white;
     final Color hoverBg = widget.onSurface
         ? LandingColors.accentGradientStart.withValues(alpha: 0.12)
         : Colors.white.withValues(alpha: 0.18);

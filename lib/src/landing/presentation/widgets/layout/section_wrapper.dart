@@ -24,9 +24,9 @@ class SectionWrapper extends StatelessWidget {
     this.verticalPaddingOverride,
     this.topPaddingExtra = 0.0,
   }) : assert(
-          background == null || decoration == null,
-          'Provide either background or decoration, not both.',
-        );
+         background == null || decoration == null,
+         'Provide either background or decoration, not both.',
+       );
 
   final Widget child;
 
@@ -52,8 +52,12 @@ class SectionWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = ScreenSizeX.of(context);
-    final vPad = (verticalPaddingOverride ?? AppSpacing.section).resolveForSize(size);
-    final hPad = size.isLaptopOrLarger ? 0.0 : AppSpacing.md.resolveForSize(size);
+    final vPad = (verticalPaddingOverride ?? AppSpacing.section).resolveForSize(
+      size,
+    );
+    // Default page gutter — applied at every breakpoint so content never touches
+    // the screen edge (e.g. between 1024px and the 1440px MaxContentWidth cap).
+    final hPad = AppSpacing.page.resolveForSize(size);
 
     final innerContent = Padding(
       padding: EdgeInsets.symmetric(horizontal: hPad),
@@ -69,10 +73,7 @@ class SectionWrapper extends StatelessWidget {
       width: double.infinity,
       color: decoration == null ? background : null,
       decoration: decoration,
-      padding: EdgeInsets.only(
-        top: vPad + topPaddingExtra,
-        bottom: vPad,
-      ),
+      padding: EdgeInsets.only(top: vPad + topPaddingExtra, bottom: vPad),
       child: MaxContentWidth(child: wrappedContent),
     );
 

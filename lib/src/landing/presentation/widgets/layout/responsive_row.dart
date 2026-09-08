@@ -46,15 +46,18 @@ class ResponsiveRow extends StatelessWidget {
   }
 
   static List<Widget> _intersperse(
-      List<Widget> children, double spacing, bool vertical) {
+    List<Widget> children,
+    double spacing,
+    bool vertical,
+  ) {
     if (spacing == 0 || children.length < 2) return children;
     final result = <Widget>[];
     for (var i = 0; i < children.length; i++) {
       result.add(children[i]);
       if (i < children.length - 1) {
-        result.add(vertical
-            ? SizedBox(height: spacing)
-            : SizedBox(width: spacing));
+        result.add(
+          vertical ? SizedBox(height: spacing) : SizedBox(width: spacing),
+        );
       }
     }
     return result;

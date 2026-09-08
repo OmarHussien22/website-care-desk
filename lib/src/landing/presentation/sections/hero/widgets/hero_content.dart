@@ -17,8 +17,9 @@ class HeroContent extends StatelessWidget {
     final isCentered = isMobile;
 
     return Column(
-      crossAxisAlignment:
-          isCentered ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+      crossAxisAlignment: isCentered
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         const _EyebrowChip(),
@@ -80,14 +81,17 @@ class _EyebrowChip extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 10),
-          CustomText(
-            'hero.eyebrow'.tr,
-            scaleFont: false,
-            fontSize: 13,
-            fontWeight: FW.semiBold,
-            color: Colors.white,
-            fontFamily: 'Montserrat',
-            letterSpacing: 0.5,
+          Flexible(
+            child: CustomText(
+              'hero.eyebrow'.tr,
+              scaleFont: false,
+              fontSize: 13,
+              fontWeight: FW.semiBold,
+              color: Colors.white,
+              fontFamily: 'Montserrat',
+              letterSpacing: 0.5,
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       ),
@@ -120,8 +124,9 @@ class _Headline extends StatelessWidget {
     final size = ScreenSizeX.of(context);
     final whole = 'hero.headline'.tr;
     final emph = 'hero.headline.emph'.tr;
-    final emphIndex =
-        emph.isNotEmpty ? whole.toLowerCase().indexOf(emph.toLowerCase()) : -1;
+    final emphIndex = emph.isNotEmpty
+        ? whole.toLowerCase().indexOf(emph.toLowerCase())
+        : -1;
 
     final baseStyle = TextStyle(
       fontSize: _fontSizeFor(size),
@@ -180,11 +185,16 @@ class _TrustChip extends StatelessWidget {
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment:
-            centered ? MainAxisAlignment.center : MainAxisAlignment.start,
+        mainAxisAlignment: centered
+            ? MainAxisAlignment.center
+            : MainAxisAlignment.start,
         children: [
-          _AvatarStack(),
-          const SizedBox(width: 12),
+          Icon(
+            Icons.verified_user_rounded,
+            color: LandingColors.success,
+            size: 18,
+          ),
+          const SizedBox(width: 10),
           Flexible(
             child: CustomText(
               'hero.trust'.tr,
@@ -195,38 +205,6 @@ class _TrustChip extends StatelessWidget {
               fontFamily: 'Montserrat',
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class _AvatarStack extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    const colors = [
-      Color(0xFFFDE68A),
-      Color(0xFFA7F3D0),
-      Color(0xFFBFDBFE),
-    ];
-    return SizedBox(
-      width: 56,
-      height: 22,
-      child: Stack(
-        children: [
-          for (int i = 0; i < colors.length; i++)
-            Positioned(
-              left: i * 16.0,
-              child: Container(
-                width: 22,
-                height: 22,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: colors[i],
-                  border: Border.all(color: Colors.white, width: 1.5),
-                ),
-              ),
-            ),
         ],
       ),
     );

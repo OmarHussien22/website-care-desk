@@ -72,13 +72,13 @@ class _AnimatedCounterState extends State<AnimatedCounter>
   }
 
   Widget _number(int value) => CustomText(
-        '${compactCount(value)}${widget.suffix}',
-        scaleFont: false,
-        fontSize: widget.fontSize,
-        fontWeight: widget.fontWeight,
-        fontFamily: 'Montserrat',
-        color: widget.color,
-      );
+    '${compactCount(value)}${widget.suffix}',
+    scaleFont: false,
+    fontSize: widget.fontSize,
+    fontWeight: widget.fontWeight,
+    fontFamily: 'Montserrat',
+    color: widget.color,
+  );
 
   @override
   Widget build(BuildContext context) {

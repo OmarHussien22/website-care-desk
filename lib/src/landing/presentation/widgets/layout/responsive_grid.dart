@@ -1,5 +1,4 @@
 import 'package:coursaty/src/landing/core/breakpoints/responsive.dart';
-import 'package:coursaty/src/landing/core/breakpoints/screen_size.dart';
 import 'package:flutter/widgets.dart';
 
 /// A grid that adapts its column count per breakpoint.
@@ -42,7 +41,9 @@ class ResponsiveGrid extends StatelessWidget {
           for (var j = 0; j < cols; j++) {
             final index = i + j;
             if (index < children.length) {
-              rowChildren.add(SizedBox(width: itemWidth, child: children[index]));
+              rowChildren.add(
+                SizedBox(width: itemWidth, child: children[index]),
+              );
             } else {
               rowChildren.add(SizedBox(width: itemWidth));
             }

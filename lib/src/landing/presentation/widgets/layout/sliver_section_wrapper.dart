@@ -15,9 +15,9 @@ class SliverSectionWrapper extends StatelessWidget {
     this.animationWrapper,
     this.verticalPaddingOverride,
   }) : assert(
-          background == null || decoration == null,
-          'Provide either background or decoration, not both.',
-        );
+         background == null || decoration == null,
+         'Provide either background or decoration, not both.',
+       );
 
   final Widget child;
   final GlobalKey? sectionKey;
@@ -29,8 +29,12 @@ class SliverSectionWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = ScreenSizeX.of(context);
-    final vPad = (verticalPaddingOverride ?? AppSpacing.section).resolveForSize(size);
-    final hPad = size.isLaptopOrLarger ? 0.0 : AppSpacing.md.resolveForSize(size);
+    final vPad = (verticalPaddingOverride ?? AppSpacing.section).resolveForSize(
+      size,
+    );
+    final hPad = size.isLaptopOrLarger
+        ? 0.0
+        : AppSpacing.md.resolveForSize(size);
 
     final innerContent = Padding(
       padding: EdgeInsets.symmetric(horizontal: hPad),

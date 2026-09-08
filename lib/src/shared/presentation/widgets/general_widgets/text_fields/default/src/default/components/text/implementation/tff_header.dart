@@ -24,7 +24,7 @@ class TFFHeader extends TFFTextImp {
       fontWeight: fontWeight?? TFFConstants.headerFontWeight,
       fontSize: (fontSize??TFFConstants.headerFontSize).toFS(),
       backgroundColor: backgroundColor?? TFFConstants.color.tFFHeaderBackground,
-      fontFamily: AppStrings.fontFamilyUrw,
+      fontFamily: AppStrings.fontFamilyMontserrat,
     );
   }
   @override
@@ -34,7 +34,7 @@ class TFFHeader extends TFFTextImp {
       fontWeight: fontWeight?? TFFConstants.hintFontWeight,
       fontSize: (fontSize??TFFConstants.hintFontSize).toFS(),
       backgroundColor: backgroundColor?? TFFConstants.color.tFFHeaderBackground,
-      fontFamily: AppStrings.fontFamilyUrw,
+      fontFamily: AppStrings.fontFamilyMontserrat,
     );
   }
 }

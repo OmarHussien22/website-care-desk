@@ -18,14 +18,18 @@ const List<_FooterItem> _productLinks = [
 ];
 
 const List<_FooterItem> _companyLinks = [
-  (labelKey: 'footer.link.about', sectionId: null, url: LandingBrand.aboutUrl),
-  (labelKey: 'footer.link.contact', sectionId: null, url: '#'),
-  (labelKey: 'footer.link.careers', sectionId: null, url: LandingBrand.careersUrl),
+  (labelKey: 'footer.link.about', sectionId: 'product', url: null),
+  (labelKey: 'footer.link.contact', sectionId: 'contact', url: null),
+  (labelKey: 'footer.link.careers', sectionId: 'audiences', url: null),
 ];
 
 const List<_FooterItem> _resourceLinks = [
   (labelKey: 'footer.link.help', sectionId: null, url: LandingBrand.helpUrl),
-  (labelKey: 'footer.link.privacy', sectionId: null, url: LandingBrand.privacyUrl),
+  (
+    labelKey: 'footer.link.privacy',
+    sectionId: null,
+    url: LandingBrand.privacyUrl,
+  ),
   (labelKey: 'footer.link.terms', sectionId: null, url: LandingBrand.termsUrl),
 ];
 
@@ -166,39 +170,42 @@ class _MobileAccordionState extends State<_MobileAccordion> {
 
   static const List<({String headingKey, List<_FooterItem> items})> _sections =
       [
-    (headingKey: 'footer.column.product', items: _productLinks),
-    (headingKey: 'footer.column.company', items: _companyLinks),
-    (headingKey: 'footer.column.resources', items: _resourceLinks),
-  ];
+        (headingKey: 'footer.column.product', items: _productLinks),
+        (headingKey: 'footer.column.company', items: _companyLinks),
+        (headingKey: 'footer.column.resources', items: _resourceLinks),
+      ];
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         for (int i = 0; i < _sections.length; i++)
-          ExpansionTile(
-            title: CustomText(
-              _sections[i].headingKey.tr,
-              scaleFont: false,
-              fontSize: 15,
-              fontWeight: FW.semiBold,
-              color: LandingColors.textPrimary,
-            ),
-            initiallyExpanded: _open == i,
-            onExpansionChanged: (open) =>
-                setState(() => _open = open ? i : null),
-            children: [
-              for (final item in _sections[i].items)
-                ListTile(
-                  dense: true,
-                  title: CustomText(
-                    item.labelKey.tr,
-                    scaleFont: false,
-                    color: LandingColors.textSecondary,
+          Material(
+            color: Colors.transparent,
+            child: ExpansionTile(
+              title: CustomText(
+                _sections[i].headingKey.tr,
+                scaleFont: false,
+                fontSize: 15,
+                fontWeight: FW.semiBold,
+                color: LandingColors.textPrimary,
+              ),
+              initiallyExpanded: _open == i,
+              onExpansionChanged: (open) =>
+                  setState(() => _open = open ? i : null),
+              children: [
+                for (final item in _sections[i].items)
+                  ListTile(
+                    dense: true,
+                    title: CustomText(
+                      item.labelKey.tr,
+                      scaleFont: false,
+                      color: LandingColors.textSecondary,
+                    ),
+                    onTap: () => _navigateFooterItem(item),
                   ),
-                  onTap: () => _navigateFooterItem(item),
-                ),
-            ],
+              ],
+            ),
           ),
       ],
     );

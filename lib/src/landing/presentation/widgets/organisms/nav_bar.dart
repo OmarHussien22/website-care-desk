@@ -1,23 +1,23 @@
 import 'package:coursaty/src/landing/core/breakpoints/screen_size.dart';
+import 'package:coursaty/src/landing/core/spacing/app_spacing.dart';
 import 'package:coursaty/src/landing/core/theme/landing_colors.dart';
-import 'package:coursaty/src/landing/data/landing_brand.dart';
+import 'package:coursaty/src/landing/core/navigation/meddesk_actions.dart';
 import 'package:coursaty/src/landing/presentation/controllers/nav_bar_controller.dart';
+import 'package:coursaty/src/landing/presentation/widgets/atoms/brand_logo.dart';
+import 'package:coursaty/src/landing/presentation/widgets/layout/max_content_width.dart';
 import 'package:coursaty/src/landing/presentation/widgets/organisms/language_toggle.dart';
 import 'package:coursaty/src/landing/presentation/widgets/organisms/nav_bar_drawer.dart';
 import 'package:coursaty/src/landing/presentation/widgets/organisms/nav_link.dart';
 import 'package:coursaty/src/shared/presentation/widgets/general_widgets/text/custom_text_lib.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 const double _navBarHeight = 64.0;
 
 const List<({String labelKey, String sectionId})> _navLinks = [
-  (labelKey: 'nav.services', sectionId: 'services'),
+  (labelKey: 'nav.product', sectionId: 'product'),
   (labelKey: 'nav.features', sectionId: 'features'),
   (labelKey: 'nav.how_it_works', sectionId: 'how-it-works'),
-  (labelKey: 'nav.for_clinicians', sectionId: 'for-clinicians'),
   (labelKey: 'nav.pricing', sectionId: 'pricing'),
   (labelKey: 'nav.faq', sectionId: 'faq'),
 ];
@@ -59,13 +59,17 @@ class LandingNavBar extends StatelessWidget {
                 ]
               : null,
         ),
+        // Same page gutter + content cap as SectionWrapper so the logo and CTA
+        // align with the section content below.
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: size.isLaptopOrLarger ? 48 : 20,
+            horizontal: AppSpacing.page.resolveForSize(size),
           ),
-          child: isDesktop
-              ? _DesktopBar(scrolled: scrolled, ctrl: ctrl)
-              : _MobileBar(scrolled: scrolled, ctrl: ctrl),
+          child: MaxContentWidth(
+            child: isDesktop
+                ? _DesktopBar(scrolled: scrolled, ctrl: ctrl)
+                : _MobileBar(scrolled: scrolled, ctrl: ctrl),
+          ),
         ),
       );
     });
@@ -110,6 +114,19 @@ class _DesktopBar extends StatelessWidget {
         LanguageToggle(onSurface: scrolled),
         const SizedBox(width: 8),
 
+        TextButton(
+          onPressed: MedDeskActions.openClinicLogin,
+          child: CustomText(
+            'nav.login'.tr,
+            scaleFont: false,
+            fontSize: 13,
+            fontWeight: FW.semiBold,
+            color: scrolled ? LandingColors.accent : Colors.white,
+            fontFamily: 'Montserrat',
+          ),
+        ),
+        const SizedBox(width: 4),
+
         // CTA button
         _CtaButton(scrolled: scrolled),
       ],
@@ -131,8 +148,6 @@ class _MobileBar extends StatelessWidget {
       children: [
         _Logo(scrolled: scrolled),
         const Spacer(),
-        LanguageToggle(onSurface: scrolled),
-        const SizedBox(width: 4),
         Semantics(
           button: true,
           label: 'nav.menu.open'.tr,
@@ -159,12 +174,16 @@ class _MobileBar extends StatelessWidget {
         pageBuilder: (ctx, animation, _) => const NavBarDrawer(),
         transitionsBuilder: (ctx, animation, _, child) {
           return SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(0, -1),
-              end: Offset.zero,
-            ).animate(
-              CurvedAnimation(parent: animation, curve: Curves.easeOutCubic),
-            ),
+            position:
+                Tween<Offset>(
+                  begin: const Offset(0, -1),
+                  end: Offset.zero,
+                ).animate(
+                  CurvedAnimation(
+                    parent: animation,
+                    curve: Curves.easeOutCubic,
+                  ),
+                ),
             child: child,
           );
         },
@@ -185,11 +204,7 @@ class _Logo extends StatelessWidget {
       onTap: () => Get.find<NavBarController>().navigateTo('hero'),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
-        child: SvgPicture.asset(
-          scrolled ? LandingBrand.logo : LandingBrand.logoInverse,
-          height: 32,
-          fit: BoxFit.contain,
-        ),
+        child: BrandLogo(height: 34, inverse: !scrolled),
       ),
     );
   }
@@ -206,12 +221,7 @@ class _CtaButton extends StatefulWidget {
 class _CtaButtonState extends State<_CtaButton> {
   bool _hovered = false;
 
-  Future<void> _onTap() async {
-    final uri = Uri.parse(LandingBrand.demoUrl);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
-  }
+  void _onTap() => MedDeskActions.openRegistration();
 
   @override
   Widget build(BuildContext context) {
@@ -236,15 +246,19 @@ class _CtaButtonState extends State<_CtaButton> {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: LandingColors.accent
-                        .withValues(alpha: _hovered ? 0.35 : 0.20),
+                    color: LandingColors.accent.withValues(
+                      alpha: _hovered ? 0.35 : 0.20,
+                    ),
                     blurRadius: _hovered ? 16 : 8,
                     offset: const Offset(0, 4),
                   ),
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
                 child: CustomText(
                   'nav.cta.demo'.tr,
                   scaleFont: false,

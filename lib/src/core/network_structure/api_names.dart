@@ -1,23 +1,40 @@
+import '../app/meddesk_config.dart';
+
 mixin ApiNames {
-  static const baseUrl = "https://api.carepro.techlabeg.com/api/";
+  static const baseUrl = MedDeskConfig.apiBaseUrl;
 
   /// ----------------------------- app status ------------------------------
-  final uRLFetchAppStatus = "${baseUrl}fetch_app_status";
+  final uRLFetchAppStatus = MedDeskConfig.apiUrl('fetch_app_status');
 
   /// ----------------------------- Auth ------------------------------
-  final uRLLogin = "${baseUrl}login";
-  final uRLRegister = "${baseUrl}register";
-  final uRLCheckVerificationCode = '${baseUrl}check_verification_code';
-  final uRLResendVerificationCode = '${baseUrl}resend_verification_code';
-  final uRLForgetPassword = "${baseUrl}forgot_password";
-  final uRLResetPassword = "${baseUrl}reset_password";
-  final uRLChangePassword = "${baseUrl}change_password";
-  final uRLLogout = '${baseUrl}logout';
-  final uRLDeleteAccount = '${baseUrl}delete_account';
-  final uRLSetUserEducationInfo = '${baseUrl}set_user_education_info';
-  final uRLFetchEducationTypes = '${baseUrl}fetch_education_types';
-  final uRLSetParentData = '${baseUrl}set_parent_data';
-  final uRLCheckInvitationCode = '${baseUrl}check_invitation_code';
+  final uRLLogin = MedDeskConfig.apiUrl('login');
+  final uRLRegister = MedDeskConfig.apiUrl('register');
+  final uRLCheckVerificationCode = MedDeskConfig.apiUrl(
+    'check_verification_code',
+  );
+  final uRLResendVerificationCode = MedDeskConfig.apiUrl(
+    'resend_verification_code',
+  );
+  final uRLForgetPassword = MedDeskConfig.apiUrl('forgot_password');
+  final uRLResetPassword = MedDeskConfig.apiUrl('reset_password');
+  final uRLChangePassword = MedDeskConfig.apiUrl('change_password');
+  final uRLLogout = MedDeskConfig.apiUrl('logout');
+  final uRLDeleteAccount = MedDeskConfig.apiUrl('delete_account');
+  final uRLSetUserEducationInfo = MedDeskConfig.apiUrl(
+    'set_user_education_info',
+  );
+  final uRLFetchEducationTypes = MedDeskConfig.apiUrl('fetch_education_types');
+  final uRLSetParentData = MedDeskConfig.apiUrl('set_parent_data');
+  final uRLCheckInvitationCode = MedDeskConfig.apiUrl('check_invitation_code');
 
+  /// Public website endpoints exposed by the companion Laravel backend.
+  final uRLPublicPlans = MedDeskConfig.publicPlansPath.isEmpty
+      ? ''
+      : MedDeskConfig.apiUrl(MedDeskConfig.publicPlansPath);
+  final uRLPublicSpecialties = MedDeskConfig.publicSpecialtiesPath.isEmpty
+      ? ''
+      : MedDeskConfig.apiUrl(MedDeskConfig.publicSpecialtiesPath);
+  final uRLPublicRegistration = MedDeskConfig.publicRegistrationPath.isEmpty
+      ? ''
+      : MedDeskConfig.apiUrl(MedDeskConfig.publicRegistrationPath);
 }
-

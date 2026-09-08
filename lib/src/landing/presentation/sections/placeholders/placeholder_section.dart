@@ -32,8 +32,10 @@ class _PlaceholderSectionState extends State<PlaceholderSection> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
-        Get.find<LandingScrollController>()
-            .registerSection(widget.sectionId, _key);
+        Get.find<LandingScrollController>().registerSection(
+          widget.sectionId,
+          _key,
+        );
       }
     });
   }
@@ -71,7 +73,10 @@ class _PlaceholderSectionState extends State<PlaceholderSection> {
 
   String _title(String id) =>
       _sectionTitle[id] ??
-      id.split('-').map((p) => p.isEmpty ? p : '${p[0].toUpperCase()}${p.substring(1)}').join(' ');
+      id
+          .split('-')
+          .map((p) => p.isEmpty ? p : '${p[0].toUpperCase()}${p.substring(1)}')
+          .join(' ');
 
   String _index(String id) =>
       (_sectionIndex[id] ?? 0).toString().padLeft(2, '0');

@@ -1,11 +1,10 @@
 import 'package:coursaty/src/landing/core/breakpoints/screen_size.dart';
 import 'package:coursaty/src/landing/core/scrolling/landing_scroll_controller.dart';
 import 'package:coursaty/src/landing/core/theme/landing_colors.dart';
-import 'package:coursaty/src/landing/data/landing_brand.dart';
+import 'package:coursaty/src/core/routers/app_routes.dart';
 import 'package:coursaty/src/shared/presentation/widgets/general_widgets/text/custom_text_lib.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 /// Primary + secondary CTA row in the hero section.
 /// Stacks vertically on mobile, horizontal on tablet+.
@@ -24,11 +23,7 @@ class HeroCtaRow extends StatelessWidget {
       // Wrap (not Row) so the buttons drop to a second line when the column is
       // too narrow — at tablet the hero is two-column, leaving the CTA only
       // ~half the viewport width, which a fixed Row would overflow.
-      return Wrap(
-        spacing: 14,
-        runSpacing: 12,
-        children: [primary, secondary],
-      );
+      return Wrap(spacing: 14, runSpacing: 12, children: [primary, secondary]);
     }
 
     return Column(
@@ -46,12 +41,7 @@ class _PrimaryCta extends StatefulWidget {
 class _PrimaryCtaState extends State<_PrimaryCta> {
   bool _hovered = false;
 
-  Future<void> _onPressed() async {
-    final uri = Uri.parse(LandingBrand.demoUrl);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
-  }
+  void _onPressed() => Get.toNamed(AppRoutes.register);
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +62,9 @@ class _PrimaryCtaState extends State<_PrimaryCta> {
               offset: Offset(0, _hovered ? 10 : 6),
             ),
             BoxShadow(
-              color: LandingColors.accentGradientEnd
-                  .withValues(alpha: _hovered ? 0.40 : 0.25),
+              color: LandingColors.accentGradientEnd.withValues(
+                alpha: _hovered ? 0.40 : 0.25,
+              ),
               blurRadius: _hovered ? 22 : 14,
               offset: const Offset(0, 4),
             ),
@@ -87,27 +78,31 @@ class _PrimaryCtaState extends State<_PrimaryCta> {
             minimumSize: const Size(0, 54),
             padding: const EdgeInsets.symmetric(horizontal: 28),
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14)),
+              borderRadius: BorderRadius.circular(14),
+            ),
             elevation: 0,
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CustomText(
-                'hero.cta.primary'.tr,
-                scaleFont: false,
-                fontSize: 16,
-                fontWeight: FW.semiBold,
-                fontFamily: 'Montserrat',
-                color: LandingColors.accent,
-              ),
-              const SizedBox(width: 10),
-              Icon(
-                Icons.arrow_forward_rounded,
-                size: 18,
-                color: LandingColors.accent,
-              ),
-            ],
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomText(
+                  'hero.cta.primary'.tr,
+                  scaleFont: false,
+                  fontSize: 16,
+                  fontWeight: FW.semiBold,
+                  fontFamily: 'Montserrat',
+                  color: LandingColors.accent,
+                ),
+                const SizedBox(width: 10),
+                Icon(
+                  Icons.arrow_forward_rounded,
+                  size: 18,
+                  color: LandingColors.accent,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -138,7 +133,7 @@ class _SecondaryCtaState extends State<_SecondaryCta> {
         ),
         child: OutlinedButton(
           onPressed: () =>
-              Get.find<LandingScrollController>().scrollTo('how-it-works'),
+              Get.find<LandingScrollController>().scrollTo('product'),
           style: OutlinedButton.styleFrom(
             foregroundColor: Colors.white,
             side: BorderSide(
@@ -148,26 +143,30 @@ class _SecondaryCtaState extends State<_SecondaryCta> {
             minimumSize: const Size(0, 54),
             padding: const EdgeInsets.symmetric(horizontal: 26),
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14)),
+              borderRadius: BorderRadius.circular(14),
+            ),
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                Icons.play_circle_outline_rounded,
-                size: 19,
-                color: Colors.white,
-              ),
-              const SizedBox(width: 10),
-              CustomText(
-                'hero.cta.secondary'.tr,
-                scaleFont: false,
-                fontSize: 16,
-                fontWeight: FW.medium,
-                fontFamily: 'Montserrat',
-                color: Colors.white,
-              ),
-            ],
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.play_circle_outline_rounded,
+                  size: 19,
+                  color: Colors.white,
+                ),
+                const SizedBox(width: 10),
+                CustomText(
+                  'hero.cta.secondary'.tr,
+                  scaleFont: false,
+                  fontSize: 16,
+                  fontWeight: FW.medium,
+                  fontFamily: 'Montserrat',
+                  color: Colors.white,
+                ),
+              ],
+            ),
           ),
         ),
       ),

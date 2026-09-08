@@ -10,9 +10,17 @@ class FooterSocialRow extends StatelessWidget {
   const FooterSocialRow({super.key});
 
   static const List<({String icon, String url, String label})> _socials = [
-    (icon: LandingBrand.socialLinkedIn, url: LandingBrand.linkedInUrl, label: 'LinkedIn'),
+    (
+      icon: LandingBrand.socialLinkedIn,
+      url: LandingBrand.linkedInUrl,
+      label: 'LinkedIn',
+    ),
     (icon: LandingBrand.socialX, url: LandingBrand.xUrl, label: 'X'),
-    (icon: LandingBrand.socialYouTube, url: LandingBrand.youTubeUrl, label: 'YouTube'),
+    (
+      icon: LandingBrand.socialYouTube,
+      url: LandingBrand.youTubeUrl,
+      label: 'YouTube',
+    ),
   ];
 
   @override
@@ -56,8 +64,9 @@ class _SocialButtonState extends State<_SocialButton> {
 
   @override
   Widget build(BuildContext context) {
-    final iconColor =
-        _hovered ? LandingColors.accent : LandingColors.textSecondary;
+    final iconColor = _hovered
+        ? LandingColors.accent
+        : LandingColors.textSecondary;
     final bg = _hovered
         ? LandingColors.accentGradientStart.withValues(alpha: 0.10)
         : Colors.transparent;

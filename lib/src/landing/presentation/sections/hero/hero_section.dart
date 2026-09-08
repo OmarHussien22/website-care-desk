@@ -40,7 +40,7 @@ class _HeroSectionState extends State<HeroSection> {
   @override
   Widget build(BuildContext context) {
     final size = ScreenSizeX.of(context);
-    final isMobile = size == ScreenSize.mobile;
+    final useStackedLayout = !size.isLaptopOrLarger;
 
     return HeroBackground(
       child: SectionWrapper(
@@ -54,7 +54,9 @@ class _HeroSectionState extends State<HeroSection> {
           desktop: 104.0,
           ultraWide: 120.0,
         ),
-        child: isMobile ? _MobileLayout() : _DesktopLayout(size: size),
+        child: useStackedLayout
+            ? const _MobileLayout()
+            : _DesktopLayout(size: size),
       ),
     );
   }
@@ -81,15 +83,13 @@ class _DesktopLayout extends StatelessWidget {
 }
 
 class _MobileLayout extends StatelessWidget {
+  const _MobileLayout();
+
   @override
   Widget build(BuildContext context) {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        HeroVisual(),
-        SizedBox(height: 32),
-        HeroContent(),
-      ],
+      children: [HeroVisual(), SizedBox(height: 32), HeroContent()],
     );
   }
 }

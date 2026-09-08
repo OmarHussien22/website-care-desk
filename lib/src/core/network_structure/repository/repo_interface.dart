@@ -41,6 +41,28 @@ abstract class RepoInterface<T> {
 
   String get errorMessage => "snack_error";
 
+  String responseErrorTitle(dynamic responseData) {
+    if (responseData is! Map) return '';
+
+    final body = Map<String, dynamic>.from(responseData);
+    final data = body['data'];
+    if (data is Map) {
+      final errors = data['errors'];
+      if (errors is Map) {
+        for (final value in errors.values) {
+          if (value is List && value.isNotEmpty) {
+            return value.first.toString();
+          }
+          if (value != null && value.toString().isNotEmpty) {
+            return value.toString();
+          }
+        }
+      }
+    }
+
+    return body['message']?.toString() ?? '';
+  }
+
   // bool  checkParams({P? params}) {
   //    printDM("checkParams in useCase 1");
   //    var value;
@@ -157,7 +179,7 @@ abstract class RepoInterface<T> {
         }
         return DataFailed(
           ErrorModel(
-            title: httpResponse.data['message'] ?? '',
+            title: responseErrorTitle(httpResponse.data),
             type: ErrorType.serverSide,
           ),
         );

@@ -17,82 +17,82 @@ class HeroBackground extends StatelessWidget {
       child: ClipRect(
         child: Stack(
           children: [
-          // Base gradient
-          Positioned.fill(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    LandingColors.accentGradientStart,
-                    LandingColors.accentGradientEnd,
-                  ],
+            // Base gradient
+            Positioned.fill(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      LandingColors.accentGradientStart,
+                      LandingColors.accentGradientEnd,
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
 
-          // Top-right orb
-          Positioned(
-            top: -120,
-            right: -80,
-            child: _Orb(
-              size: 360,
-              color: Colors.white.withValues(alpha: 0.18),
-            ),
-          ),
-
-          // Bottom-left orb
-          Positioned(
-            bottom: -160,
-            left: -100,
-            child: _Orb(
-              size: 420,
-              color: LandingColors.accentGradientEnd.withValues(alpha: 0.35),
-            ),
-          ),
-
-          // Mid-right secondary orb
-          Positioned(
-            top: 120,
-            right: 200,
-            child: _Orb(
-              size: 180,
-              color: Colors.white.withValues(alpha: 0.10),
-            ),
-          ),
-
-          // Dot grid texture
-          Positioned.fill(
-            child: CustomPaint(
-              painter: _DotGridPainter(
-                color: Colors.white.withValues(alpha: 0.06),
-                spacing: 28,
-                radius: 1.1,
+            // Top-right orb
+            Positioned(
+              top: -120,
+              right: -80,
+              child: _Orb(
+                size: 360,
+                color: Colors.white.withValues(alpha: 0.18),
               ),
             ),
-          ),
 
-          // Subtle bottom vignette for depth
-          Positioned.fill(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    LandingColors.accent.withValues(alpha: 0.12),
-                  ],
-                  stops: const [0.7, 1.0],
+            // Bottom-left orb
+            Positioned(
+              bottom: -160,
+              left: -100,
+              child: _Orb(
+                size: 420,
+                color: LandingColors.accentGradientEnd.withValues(alpha: 0.35),
+              ),
+            ),
+
+            // Mid-right secondary orb
+            Positioned(
+              top: 120,
+              right: 200,
+              child: _Orb(
+                size: 180,
+                color: Colors.white.withValues(alpha: 0.10),
+              ),
+            ),
+
+            // Dot grid texture
+            Positioned.fill(
+              child: CustomPaint(
+                painter: _DotGridPainter(
+                  color: Colors.white.withValues(alpha: 0.06),
+                  spacing: 28,
+                  radius: 1.1,
                 ),
               ),
             ),
-          ),
 
-          child,
-        ],
+            // Subtle bottom vignette for depth
+            Positioned.fill(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      LandingColors.accent.withValues(alpha: 0.12),
+                    ],
+                    stops: const [0.7, 1.0],
+                  ),
+                ),
+              ),
+            ),
+
+            child,
+          ],
         ),
       ),
     );

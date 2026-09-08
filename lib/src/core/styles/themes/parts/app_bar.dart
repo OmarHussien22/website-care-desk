@@ -18,7 +18,7 @@ AppBarTheme getAppBarTheme({
       statusBarIconBrightness:  isDark ? Brightness.light : Brightness.dark,
     ),
     titleTextStyle: TextStyle(
-      fontFamily: AppStrings.fontFamilyUrw,
+      fontFamily: AppStrings.fontFamilyMontserrat,
       color: AppColors.get.appBarColorInner,
       fontSize: 18,
       fontWeight: FontWeight.w600,

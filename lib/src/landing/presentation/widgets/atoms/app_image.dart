@@ -10,8 +10,8 @@ class AppImage extends StatelessWidget {
     this.width,
     this.height,
     this.fit = BoxFit.cover,
-  })  : assetPath = null,
-        svgAsset = null;
+  }) : assetPath = null,
+       svgAsset = null;
 
   const AppImage.asset({
     super.key,
@@ -19,8 +19,8 @@ class AppImage extends StatelessWidget {
     this.width,
     this.height,
     this.fit = BoxFit.cover,
-  })  : url = null,
-        svgAsset = null;
+  }) : url = null,
+       svgAsset = null;
 
   const AppImage.svg({
     super.key,
@@ -28,8 +28,8 @@ class AppImage extends StatelessWidget {
     this.width,
     this.height,
     this.fit = BoxFit.contain,
-  })  : url = null,
-        assetPath = null;
+  }) : url = null,
+       assetPath = null;
 
   final String? url;
   final String? assetPath;
@@ -41,7 +41,12 @@ class AppImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (svgAsset != null) {
-      return SvgPicture.asset(svgAsset!, width: width, height: height, fit: fit);
+      return SvgPicture.asset(
+        svgAsset!,
+        width: width,
+        height: height,
+        fit: fit,
+      );
     }
     if (url != null) {
       return CachedNetworkImage(

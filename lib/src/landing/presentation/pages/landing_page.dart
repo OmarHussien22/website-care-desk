@@ -3,9 +3,10 @@ import 'package:coursaty/src/landing/core/scrolling/landing_scroll_controller.da
 import 'package:coursaty/src/landing/core/theme/landing_colors.dart';
 import 'package:coursaty/src/landing/presentation/sections/footer/footer_section.dart';
 import 'package:coursaty/src/landing/presentation/sections/hero/hero_section.dart';
-import 'package:coursaty/src/landing/presentation/sections/placeholders/placeholder_section.dart';
+import 'package:coursaty/src/landing/presentation/sections/features/features_section.dart';
+import 'package:coursaty/src/landing/presentation/sections/marketing/marketing_sections.dart';
+import 'package:coursaty/src/landing/presentation/sections/pricing/pricing_section.dart';
 import 'package:coursaty/src/landing/presentation/sections/services/services_section.dart';
-import 'package:coursaty/src/landing/presentation/sections/stats/stats_section.dart';
 import 'package:coursaty/src/landing/presentation/widgets/organisms/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,7 @@ class LandingPage extends StatelessWidget {
     final ctrl = Get.find<LandingScrollController>();
 
     return Scaffold(
-      backgroundColor: LandingColors.surfaceElevated,
+      backgroundColor: LandingColors.surfaceMuted,
       body: Stack(
         children: [
           // ── Scrollable content ────────────────────────────────────────────
@@ -28,9 +29,9 @@ class LandingPage extends StatelessWidget {
               // § 0 — Hero
               const SliverToBoxAdapter(child: HeroSection()),
 
-              // § 1 — Statistics (Phase 3)
+              // Verified trust and platform foundations.
               SliverToBoxAdapter(
-                child: FadeInOnScroll(child: const StatsSection()),
+                child: FadeInOnScroll(child: const TrustStripSection()),
               ),
 
               // § 2 — Services (Phase 3)
@@ -38,82 +39,49 @@ class LandingPage extends StatelessWidget {
                 child: FadeInOnScroll(child: const ServicesSection()),
               ),
 
-              // § 3 — Logos strip (Phase 4)
+              // Product screenshots / representative dashboard tour.
               SliverToBoxAdapter(
-                child: FadeInOnScroll(
-                  child: PlaceholderSection(
-                    sectionId: 'logos',
-                    background: LandingColors.surfaceMuted,
-                  ),
-                ),
+                child: FadeInOnScroll(child: const ProductTourSection()),
               ),
 
-              // § 4 — Features (Phase 4)
+              // Supported capabilities.
               SliverToBoxAdapter(
-                child: FadeInOnScroll(
-                  child: const PlaceholderSection(sectionId: 'features'),
-                ),
+                child: FadeInOnScroll(child: const FeaturesSection()),
               ),
 
-              // § 5 — How it works (Phase 4)
+              // Onboarding flow.
               SliverToBoxAdapter(
-                child: FadeInOnScroll(
-                  child: PlaceholderSection(
-                    sectionId: 'how-it-works',
-                    background: LandingColors.surfaceMuted,
-                  ),
-                ),
+                child: FadeInOnScroll(child: const HowItWorksSection()),
               ),
 
-              // § 6 — For clinicians (Phase 4)
+              // Doctors, medical centers, and receptionists.
               SliverToBoxAdapter(
-                child: FadeInOnScroll(
-                  child: const PlaceholderSection(sectionId: 'for-clinicians'),
-                ),
+                child: FadeInOnScroll(child: const AudiencesSection()),
               ),
 
-              // § 7 — For patients (Phase 4)
+              // Responsive and upcoming native mobile experience.
               SliverToBoxAdapter(
-                child: FadeInOnScroll(
-                  child: PlaceholderSection(
-                    sectionId: 'for-patients',
-                    background: LandingColors.surfaceMuted,
-                  ),
-                ),
+                child: FadeInOnScroll(child: const MobileAppSection()),
               ),
 
-              // § 8 — Pricing (Phase 4)
+              // Backend-driven catalog.
               SliverToBoxAdapter(
-                child: FadeInOnScroll(
-                  child: const PlaceholderSection(sectionId: 'pricing'),
-                ),
+                child: FadeInOnScroll(child: const PricingSection()),
               ),
 
-              // § 9 — Testimonials (Phase 4)
+              // Product FAQ.
               SliverToBoxAdapter(
-                child: FadeInOnScroll(
-                  child: PlaceholderSection(
-                    sectionId: 'testimonials',
-                    background: LandingColors.surfaceMuted,
-                  ),
-                ),
+                child: FadeInOnScroll(child: const FaqSection()),
               ),
 
-              // § 10 — FAQ (Phase 4)
+              // Demo request form, safely idle without an endpoint.
               SliverToBoxAdapter(
-                child: FadeInOnScroll(
-                  child: const PlaceholderSection(sectionId: 'faq'),
-                ),
+                child: FadeInOnScroll(child: const ContactSection()),
               ),
 
-              // § 11 — CTA (Phase 4)
+              // Consistent registration / login CTA.
               SliverToBoxAdapter(
-                child: FadeInOnScroll(
-                  child: PlaceholderSection(
-                    sectionId: 'cta',
-                    background: LandingColors.surfaceMuted,
-                  ),
-                ),
+                child: FadeInOnScroll(child: const FinalCtaSection()),
               ),
 
               // § 12 — Footer
@@ -122,12 +90,7 @@ class LandingPage extends StatelessWidget {
           ),
 
           // ── Sticky NavBar overlay ─────────────────────────────────────────
-          const Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: LandingNavBar(),
-          ),
+          const Positioned(top: 0, left: 0, right: 0, child: LandingNavBar()),
         ],
       ),
     );
