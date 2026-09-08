@@ -16,6 +16,7 @@ String compactCount(int value) {
   return '$value';
 }
 
+
 /// Counts up `0 → target` the first time it scrolls into view, then latches.
 ///
 /// Uses the same `visibility_detector` mechanism as [FadeInOnScroll] and
