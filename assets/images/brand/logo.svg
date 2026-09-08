@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 44" fill="none">
+  <defs>
+    <linearGradient id="markGradLight" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0EA5E9"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+  <!-- Mark: rounded square with white medical plus + heartbeat tick -->
+  <rect x="0" y="4" width="36" height="36" rx="10" fill="url(#markGradLight)"/>
+  <!-- Plus -->
+  <rect x="15.5" y="10" width="5" height="20" rx="1.5" fill="white"/>
+  <rect x="8" y="17.5" width="20" height="5" rx="1.5" fill="white"/>
+  <!-- Heartbeat tick (subtle, lower right) -->
+  <path d="M9 31 L13 31 L15 27 L18 35 L21 30 L27 30" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.55" fill="none"/>
+  <!-- Wordmark -->
+  <text x="46" y="29" font-family="Montserrat, system-ui, sans-serif" font-size="19" font-weight="700" fill="#0F172A" letter-spacing="-0.4">MedDesk</text>
+</svg>

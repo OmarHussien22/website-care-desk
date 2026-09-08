@@ -1,10 +1,31 @@
+import 'package:coursaty/src/landing/presentation/pages/landing_binding.dart';
+import 'package:coursaty/src/landing/presentation/pages/landing_page.dart';
+import 'package:coursaty/src/features/clinic_onboarding/presentation/pages/clinic_registration_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'app_routes.dart';
-import 'route_args.dart';
 
 class AppRouter {
   // All pages registered here
   static final List<GetPage<dynamic>> pages = <GetPage<dynamic>>[
+    GetPage(
+      name: AppRoutes.landing,
+      page: () => const LandingPage(),
+      binding: LandingBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.register,
+      page: () => const ClinicRegistrationPage(),
+      transition: Transition.fadeIn,
+    ),
+    if (kIsWeb)
+      GetPage(
+        name: AppRoutes.landingRoot,
+        page: () => const LandingPage(),
+        binding: LandingBinding(),
+        transition: Transition.fadeIn,
+      ),
     // GetPage(
     //   name: AppRoutes.splash,
     //   page: () => const SplashPage(),

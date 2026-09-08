@@ -30,21 +30,14 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
     log('state: $state', name: 'AppLifecycleState');
-    // TODO: logic - implement didChangeAppLifecycleState
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: ScreenUtilInit(
-        // TODO 5: Set your device screen size here ! (width, height)
-        designSize: AppSizes.screenSize,
-        minTextAdapt: true,
-        builder: (context, child) {
-          return child!;
-        },
-      ),
+    return ScreenUtilInit(
+      designSize: AppSizes.screenSize,
+      minTextAdapt: true,
+      builder: (context, child) => const AppMaterial(),
     );
   }
 }

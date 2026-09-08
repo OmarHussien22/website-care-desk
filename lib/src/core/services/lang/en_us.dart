@@ -1,4 +1,7 @@
+import 'package:coursaty/src/landing/core/i18n/landing_translations.dart';
+
 Map<String, String> enUS = {
+  ...landingEnUS,
   "validate_invalid_email":
       "Sorry, the email is incorrect, please check the correct format",
   "retry": "Retry",

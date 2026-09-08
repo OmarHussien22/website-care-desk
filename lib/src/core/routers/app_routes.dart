@@ -30,4 +30,9 @@ class AppRoutes {
 
   /// --------------------- home -------------------------------
   static const base = "/base";
+
+  /// --------------------- landing -------------------------------
+  /// Web: '/' — served as the root. Native: '/landing' (splash takes '/splash').
+  static const landing = "/landing";
+  static const landingRoot = "/";
 }

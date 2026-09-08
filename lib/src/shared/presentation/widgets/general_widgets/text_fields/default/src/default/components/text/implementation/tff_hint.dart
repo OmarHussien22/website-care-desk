@@ -24,7 +24,7 @@ class TFFHint extends TFFTextImp {
       fontWeight: fontWeight ?? TFFConstants.hintFontWeight,
       fontSize: (fontSize ?? TFFConstants.hintFontSize).toFS(),
       backgroundColor: backgroundColor ?? TFFConstants.color.transparent,
-      fontFamily: AppStrings.fontFamilyUrw,
+      fontFamily: AppStrings.fontFamilyMontserrat,
     );
   }
 }

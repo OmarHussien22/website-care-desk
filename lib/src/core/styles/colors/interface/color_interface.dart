@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import '../../../app/meddesk_config.dart';
 
 import '../../../utils/extensions/color_extension.dart';
 
 abstract class ColorInterface {
   // TODO 6 : Add Basic Colors here !
-  Color get primarySwatch => const Color(0xff3F44DC);
+  Color get primarySwatch => MedDeskConfig.primaryColor;
 
   // Color get primary => const Color(0xff93518B);
   // Color get primary => const Color(0xff3F44DC);
-  Color get primary => const Color(0xff1976D2);
+  Color get primary => MedDeskConfig.primaryColor;
 
   Color get lightPrimary => const Color(0xff4245a8);
 
@@ -16,7 +17,7 @@ abstract class ColorInterface {
 
   Color get primaryDarker => const Color(0xff4E0049);
 
-  Color get secondary => const Color(0xffF9EBCC);
+  Color get secondary => MedDeskConfig.secondaryColor;
 
   Color get third => const Color(0xff9CA0BC);
 
@@ -100,13 +101,11 @@ abstract class ColorInterface {
 
   Color get transparent => Colors.transparent;
 
-
   Color get red => const Color(0xffF44336);
   Color get lightRed => const Color(0xffFCF3F3);
   Color get darkRed => const Color(0xffc00000);
 
   Color get error => const Color(0xffE23535);
-
 
   Color get caution => const Color(0xffFF2D55);
 
@@ -166,7 +165,7 @@ abstract class ColorInterface {
 
   Color get onRefreshIndicator;
 
-//<editor-fold desc="Text Field">
+  //<editor-fold desc="Text Field">
   Color get tFFFillColor => Colors.white;
 
   Color get tTFCursor => const Color(0xff000000);
@@ -187,7 +186,7 @@ abstract class ColorInterface {
 
   Color get tTFErrorTextBcg => const Color(0xffFEF1F1);
 
-  Color get tFFHintTitle =>  lightBlue;
+  Color get tFFHintTitle => lightBlue;
 
   Color get tTFHintTextBcg => const Color(0xffFEF1F1);
 
@@ -197,7 +196,7 @@ abstract class ColorInterface {
 
   Color get tFFLabelTitle => lightBlue;
 
-  Color get tFFLabelBackground =>transparent;
+  Color get tFFLabelBackground => transparent;
 
   Color get tTFBackGround => Colors.transparent;
 
@@ -216,26 +215,24 @@ abstract class ColorInterface {
 
   Color get tFFSuffixText => const Color(0xffFEF1F1);
 
-//</editor-fold>
+  //</editor-fold>
 
-
-
-
-
-
-
-
+  // ---------------------- Landing-specific tokens ----------------------
+  Color get surfaceMuted;
+  Color get surfaceElevated;
+  Color get borderSubtle;
+  Color get accentGradientStart;
+  Color get accentGradientEnd;
+  Color get textPrimary;
+  Color get textSecondary;
+  Color get textInverse;
 
   LinearGradient get defaultLinearColor => LinearGradient(
     begin: Alignment.bottomLeft,
     end: Alignment.topRight,
-    transform:const GradientRotation(-0.5),
+    transform: const GradientRotation(-0.5),
     colors: linearColors,
   );
 
-  List<Color> get linearColors=>[
-    primary,
-Color(0xff0D47A1),
-
-  ];
+  List<Color> get linearColors => [primary, Color(0xff0D47A1)];
 }

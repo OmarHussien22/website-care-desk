@@ -1,4 +1,7 @@
+import 'package:coursaty/src/landing/core/i18n/landing_translations.dart';
+
 Map<String, String> arAE = {
+  ...landingArAE,
   "choose_language_first": "اختر اللغة اولاً",
   "choose_language_sub": "حدد لغتك المفضلة للمتابعة",
   "something_went_wrong": "صار في خطأ !",

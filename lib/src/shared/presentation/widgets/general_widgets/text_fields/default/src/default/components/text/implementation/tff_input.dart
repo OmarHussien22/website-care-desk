@@ -22,7 +22,7 @@ class TFFInput extends TFFTextImp {
       color: color?? TFFConstants.color.tFFInputTitle,
       fontWeight: fontWeight ?? TFFConstants.headerFontWeight,
       fontSize: (fontSize?? TFFConstants.headerFontSize).toFS(),
-      fontFamily: AppStrings.fontFamilyUrw,
+      fontFamily: AppStrings.fontFamilyMontserrat,
       backgroundColor: backgroundColor?? TFFConstants.color.tFFInputBackground,
     );
   }

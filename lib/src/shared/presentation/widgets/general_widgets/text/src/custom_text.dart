@@ -18,6 +18,13 @@ class CustomText extends StatelessWidget {
   final String? fontFamily;
   final TextAlign? textAlign;
   final FW fontWeight;
+  final TextRole? role;
+
+  /// When true (default) the raw [fontSize] is scaled via screenutil (`.sp`).
+  /// Pass `false` to use [fontSize] as a fixed logical-px value — used by the
+  /// landing page, whose typography is already breakpoint-responsive and must
+  /// not be double-scaled. Ignored when [role] is set (roles never scale).
+  final bool scaleFont;
 
   const CustomText(
     this.label, {
@@ -37,6 +44,8 @@ class CustomText extends StatelessWidget {
     this.textShadow = false,
     this.backgroundColor,
     this.letterSpacing,
+    this.role,
+    this.scaleFont = true,
   }) : super(key: key);
 
 //</editor-fold>
@@ -145,34 +154,37 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextStyle baseStyle;
+    if (role != null) {
+      baseStyle = AppTextStyles.of(context, role!, color: color ?? AppColors.get.titleText);
+    } else {
+      baseStyle = Theme.of(context).textTheme.titleMedium!.copyWith(
+            color: color ?? AppColors.get.titleText,
+            backgroundColor: backgroundColor,
+            fontSize: scaleFont ? (fontSize ?? 16).toFS() : (fontSize ?? 16),
+            fontWeight: customTextFw(fontWeight),
+            decoration: customTextDecoration(decoration),
+            height: textHeight,
+            letterSpacing: letterSpacing,
+            fontFamily: fontFamily ?? AppStrings.fontFamilyMontserrat,
+            shadows: textShadow
+                ? [
+                    Shadow(
+                      blurRadius: 0.8.toRad(),
+                      color: Colors.black,
+                      offset: const Offset(1, 1),
+                    )
+                  ]
+                : null,
+          );
+    }
+
     return Padding(
       padding: padding ?? EdgeInsets.zero,
       child: Text(
-        customTextLabel(
-          label: label,
-          isUpperCase: isUpperCase,
-        ),
-        textScaleFactor: 1,
-        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: color ?? AppColors.get.titleText,
-              backgroundColor: backgroundColor,
-              fontSize: (fontSize ?? 16).toFS(),
-              fontWeight: customTextFw(fontWeight),
-              decoration: customTextDecoration(decoration),
-              //TextDecoration.combine(Decorations),
-              height: textHeight,
-              letterSpacing: letterSpacing,
-              fontFamily: fontFamily ?? AppStrings.fontFamilyUrw,
-              shadows: textShadow
-                  ? [
-                      Shadow(
-                        blurRadius: 0.8.toRad(),
-                        color: Colors.black,
-                        offset: const Offset(1, 1),
-                      )
-                    ]
-                  : null,
-            ),
+        customTextLabel(label: label, isUpperCase: isUpperCase),
+        textScaler: TextScaler.noScaling,
+        style: baseStyle,
         textAlign: textAlign,
         overflow: isOverFlow ? TextOverflow.ellipsis : null,
         maxLines: maxLines,

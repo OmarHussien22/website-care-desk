@@ -8,7 +8,7 @@ final ThemeData _defaultTheme = ThemeData(
   primaryColor: AppColors.get.primary,
   brightness: Brightness.light,
   visualDensity: VisualDensity.adaptivePlatformDensity,
-  fontFamily: AppStrings.fontFamilyUrw,
+  fontFamily: AppStrings.fontFamilyMontserrat,
   // backgroundColor: AppColors.get.background,
   buttonTheme: ButtonThemeData(
     buttonColor: AppColors.get.primary,

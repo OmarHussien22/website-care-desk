@@ -2,6 +2,7 @@ import 'dart:io';
 
 import '../../services/lang/translate_extention.dart';
 import '../../services/package_info/package_info.dart';
+import '../../app/meddesk_config.dart';
 
 String kDummyData = Platform.isAndroid
     ? ""
@@ -11,14 +12,15 @@ String kDummyData = Platform.isAndroid
 class AppStrings {
   AppStrings._();
 
-  static const String appName = 'Care P.O';
+  static const String appName = MedDeskConfig.applicationName;
   static const String appDescription =
-      '$appName is an e-commerce application that allows users to browse and purchase products online.';
+      'Clinic management software for appointments, patients, medical records, billing, teams, and reports.';
   static final String appLegalese =
       '${"all_rights_reserved".toTr()} $appName © ${DateTime.now().year}';
   static const String androidIconPath = '@mipmap/ic_launcher';
   static const String companyNAme = 'TechLab';
-  static const String fontFamilyUrw = "urw";
+  static const String fontFamilyMontserrat = 'Montserrat';
+  static const String fontFamilyUrw = 'URW';
   static const String fontFamilySar = "sar";
   static const String fontFamilyMochiyPop = "mochiy_pop";
   static const String fontFamilySecondary = "";
