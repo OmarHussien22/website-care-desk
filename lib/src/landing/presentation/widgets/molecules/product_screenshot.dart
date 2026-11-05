@@ -1,6 +1,7 @@
-import 'package:coursaty/src/landing/core/breakpoints/screen_size.dart';
-import 'package:coursaty/src/landing/core/theme/landing_colors.dart';
-import 'package:coursaty/src/shared/presentation/widgets/general_widgets/text/custom_text_lib.dart';
+import '../../../core/breakpoints/screen_size.dart';
+import '../../../core/theme/landing_colors.dart';
+import '../../../core/typography/text_role.dart';
+import '../../../../shared/presentation/widgets/general_widgets/text/custom_text_lib.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,17 +19,23 @@ class ProductScreenshot extends StatelessWidget {
     this.screen = ProductScreen.dashboard,
     this.assetPath,
     this.altTextKey = 'product.dashboard',
+    this.useCompactLayout,
   });
+
+  static const double previewWidth = 920;
 
   final ProductFrameType frameType;
   final ProductScreen screen;
   final String? assetPath;
   final String altTextKey;
+  final bool? useCompactLayout;
 
   @override
   Widget build(BuildContext context) {
     final mobile = frameType == ProductFrameType.mobile;
-    final compact = mobile || ScreenSizeX.of(context) == ScreenSize.mobile;
+    final compact =
+        useCompactLayout ??
+        (mobile || ScreenSizeX.of(context) == ScreenSize.mobile);
     final radius = mobile ? 30.0 : 20.0;
     final body = assetPath == null
         ? _DashboardPreview(screen: screen, compact: compact)
@@ -185,7 +192,7 @@ class _DashboardPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (compact) return const _MobilePreview();
+    if (compact) return _MobilePreview(screen: screen);
     return Row(
       children: [
         const _Sidebar(),
@@ -376,7 +383,12 @@ class _ScreenBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  'mock.schedule'.tr,
+                  (screen == ProductScreen.patients
+                          ? 'features.records.title'
+                          : screen == ProductScreen.billing
+                          ? 'product.billing'
+                          : 'mock.schedule')
+                      .tr,
                   scaleFont: false,
                   fontSize: 10.0,
                   fontWeight: FW.bold,
@@ -384,7 +396,9 @@ class _ScreenBody extends StatelessWidget {
                 ),
                 const SizedBox(height: 10.0),
                 for (int index = 0; index < 3; index++) ...[
-                  Expanded(child: _TableRow(index: index)),
+                  Expanded(
+                    child: _TableRow(index: index, screen: screen),
+                  ),
                   if (index < 2)
                     Divider(height: 1.0, color: LandingColors.borderSubtle),
                 ],
@@ -460,8 +474,9 @@ class _MetricCard extends StatelessWidget {
 }
 
 class _TableRow extends StatelessWidget {
-  const _TableRow({required this.index});
+  const _TableRow({required this.index, required this.screen});
   final int index;
+  final ProductScreen screen;
 
   @override
   Widget build(BuildContext context) => Row(
@@ -481,12 +496,12 @@ class _TableRow extends StatelessWidget {
       ),
       const SizedBox(width: 8.0),
       Expanded(
-        child: Container(
-          height: 5.0,
-          decoration: BoxDecoration(
-            color: LandingColors.borderSubtle,
-            borderRadius: BorderRadius.circular(8.0),
-          ),
+        child: CustomText(
+          screen == ProductScreen.billing
+              ? 'INV-00${index + 1}'
+              : '${'mock.patient_name'.tr} 0${index + 1}',
+          role: TextRole.caption,
+          color: LandingColors.textPrimary,
         ),
       ),
       const SizedBox(width: 18.0),
@@ -500,7 +515,14 @@ class _TableRow extends StatelessWidget {
         ),
         alignment: Alignment.center,
         child: CustomText(
-          (index == 1 ? 'mock.waiting' : 'mock.confirmed').tr,
+          (screen == ProductScreen.billing
+                  ? 'mock.paid'
+                  : screen == ProductScreen.patients
+                  ? 'product.patients'
+                  : index == 1
+                  ? 'mock.waiting'
+                  : 'mock.confirmed')
+              .tr,
           scaleFont: false,
           fontSize: 6.5,
           color: index == 1 ? LandingColors.secondary : LandingColors.success,
@@ -512,7 +534,8 @@ class _TableRow extends StatelessWidget {
 }
 
 class _MobilePreview extends StatelessWidget {
-  const _MobilePreview();
+  const _MobilePreview({required this.screen});
+  final ProductScreen screen;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -546,7 +569,12 @@ class _MobilePreview extends StatelessWidget {
         ),
         const SizedBox(height: 22.0),
         CustomText(
-          'mock.schedule'.tr,
+          (screen == ProductScreen.patients
+                  ? 'product.patients'
+                  : screen == ProductScreen.billing
+                  ? 'product.billing'
+                  : 'mock.schedule')
+              .tr,
           scaleFont: false,
           fontSize: 17.0,
           fontWeight: FW.bold,

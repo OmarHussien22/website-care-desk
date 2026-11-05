@@ -1,16 +1,17 @@
-import 'package:coursaty/src/landing/core/breakpoints/responsive.dart';
-import 'package:coursaty/src/landing/core/breakpoints/screen_size.dart';
-import 'package:coursaty/src/landing/core/scrolling/landing_scroll_controller.dart';
-import 'package:coursaty/src/landing/core/spacing/app_spacing.dart';
-import 'package:coursaty/src/landing/presentation/sections/hero/widgets/hero_background.dart';
-import 'package:coursaty/src/landing/presentation/sections/hero/widgets/hero_content.dart';
-import 'package:coursaty/src/landing/presentation/sections/hero/widgets/hero_visual.dart';
-import 'package:coursaty/src/landing/presentation/widgets/layout/section_wrapper.dart';
+import '../../../core/breakpoints/responsive.dart';
+import '../../../core/animations/fade_in_on_scroll.dart';
+import '../../../core/breakpoints/screen_size.dart';
+import '../../../core/scrolling/landing_scroll_controller.dart';
+import '../../../core/spacing/app_spacing.dart';
+import 'widgets/hero_background.dart';
+import 'widgets/hero_content.dart';
+import 'widgets/hero_visual.dart';
+import '../../widgets/layout/section_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 /// The landing page hero section.
-/// Two-column at laptop+, single-column (visual on top) at mobile.
+/// Two columns on desktop; message and actions come first on smaller screens.
 class HeroSection extends StatefulWidget {
   const HeroSection({super.key});
 
@@ -33,7 +34,9 @@ class _HeroSectionState extends State<HeroSection> {
 
   @override
   void dispose() {
-    Get.find<LandingScrollController>().unregisterSection('hero');
+    if (Get.isRegistered<LandingScrollController>()) {
+      Get.find<LandingScrollController>().unregisterSection('hero');
+    }
     super.dispose();
   }
 
@@ -45,14 +48,14 @@ class _HeroSectionState extends State<HeroSection> {
     return HeroBackground(
       child: SectionWrapper(
         sectionKey: _key,
-        // 64 = NavBar height clearance; vertical padding is breathing room below NavBar.
-        topPaddingExtra: 64.0,
+        topPaddingExtra:
+            AppSpacing.lg.resolve(context) + AppSpacing.md.resolve(context),
         verticalPaddingOverride: const Responsive(
           mobile: 48.0,
-          tablet: 64.0,
-          laptop: 88.0,
-          desktop: 104.0,
-          ultraWide: 120.0,
+          tablet: 56.0,
+          laptop: 64.0,
+          desktop: 64.0,
+          ultraWide: 80.0,
         ),
         child: useStackedLayout
             ? const _MobileLayout()
@@ -68,13 +71,16 @@ class _DesktopLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final leftFlex = size == ScreenSize.tablet ? 1 : 55;
-    final rightFlex = size == ScreenSize.tablet ? 1 : 45;
+    const leftFlex = 46;
+    const rightFlex = 54;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Expanded(flex: leftFlex, child: const HeroContent()),
+        Expanded(
+          flex: leftFlex,
+          child: FadeInOnScroll(child: const HeroContent()),
+        ),
         SizedBox(width: AppSpacing.lg.resolveForSize(size)),
         Expanded(flex: rightFlex, child: const HeroVisual()),
       ],
@@ -87,9 +93,13 @@ class _MobileLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [HeroVisual(), SizedBox(height: 32), HeroContent()],
+      children: [
+        const HeroContent(),
+        SizedBox(height: AppSpacing.xl.resolve(context)),
+        const HeroVisual(),
+      ],
     );
   }
 }

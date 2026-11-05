@@ -1,6 +1,15 @@
 /// All marketing and onboarding copy lives here so every visible surface is
 /// fully translatable. Arabic is the product default.
 const Map<String, String> landingEnUS = {
+  'nav.clients': 'Our clients',
+  'hero.workspace': 'YOUR CLINIC, AT A GLANCE',
+  'hero.connected.title': 'A more connected care team',
+  'hero.connected.desc': 'Patients, schedules and records. In sync.',
+  'hero.preview': 'Illustrative workspace · Explore the product tour below',
+  'clients.eyebrow': 'Our clients',
+  'clients.title': 'In good company.',
+  'clients.subtitle':
+      'Meet the clinics and care teams using MedDesk in their daily work.',
   'nav.home': 'Home',
   'nav.features': 'Features',
   'nav.product': 'Product tour',
@@ -22,7 +31,7 @@ const Map<String, String> landingEnUS = {
       'MedDesk brings patients, appointments, medical records, billing, teams, reports, and notifications into one clear workspace.',
   'hero.cta.primary': 'Start free trial',
   'hero.cta.secondary': 'Explore MedDesk',
-  'hero.trust': 'Tenant-aware access · Arabic & English · Secure role controls',
+  'hero.trust': 'Arabic & English · Your data, protected · Built for your team',
   'trust.secure.title': 'Role-based access',
   'trust.secure.desc': 'Owners and receptionists see only the tools they need.',
   'trust.tenant.title': 'Clinic data isolation',
@@ -31,10 +40,10 @@ const Map<String, String> landingEnUS = {
   'trust.language.desc': 'A complete bilingual experience for regional teams.',
   'trust.scale.title': 'Built to grow',
   'trust.scale.desc': 'Plans and limits scale with your clinic.',
-  'services.eyebrow': 'Real capabilities',
-  'services.title': 'One operating system for daily clinic work',
+  'services.eyebrow': 'A calmer clinic day',
+  'services.title': 'Everything flows better, together.',
   'services.subtitle':
-      'Built around the workflows already supported by MedDesk.',
+      'From the first appointment to the final invoice, keep your team focused on what matters: your patients.',
   'services.doctor_mgmt.title': 'Doctors & schedules',
   'services.doctor_mgmt.desc':
       'Manage doctors, working days, sessions, slots, and vacations.',
@@ -56,7 +65,7 @@ const Map<String, String> landingEnUS = {
   'features.eyebrow': 'Core platform',
   'features.title': 'Designed around the complete patient journey',
   'features.subtitle':
-      'Every capability below is backed by the current MedDesk system.',
+      'Connected tools that keep your team informed at every step of care.',
   'features.booking.title': 'Appointment management',
   'features.booking.desc':
       'Create appointments, update details, and track their status.',
@@ -86,13 +95,13 @@ const Map<String, String> landingEnUS = {
       'Open tickets, continue conversations, and share attachments.',
   'features.subscription.title': 'Subscription management',
   'features.subscription.desc':
-      'Backend-controlled plans, features, limits, and trial status.',
-  'features.tenant.title': 'Multi-tenant clinics',
+      'View your plan, included features, usage limits, and trial status.',
+  'features.tenant.title': 'Independent clinic workspaces',
   'features.tenant.desc':
-      'Clinic-scoped users and records keep operations separated.',
+      'Keep each clinic’s team and records organized in its own workspace.',
   'features.settings.title': 'Clinic settings',
   'features.settings.desc':
-      'Update clinic profile, specialty, API key, and WhatsApp settings.',
+      'Personalize your clinic profile, specialty, and WhatsApp settings.',
   'product.eyebrow': 'Product tour',
   'product.title': 'A focused workspace for every role',
   'product.subtitle':
@@ -119,12 +128,12 @@ const Map<String, String> landingEnUS = {
   'mock.waiting': 'Waiting',
   'mock.paid': 'Paid',
   'how.eyebrow': 'How it works',
-  'how.title': 'Go from setup to daily operations in four steps',
+  'how.title': 'Your next chapter starts here.',
   'how.subtitle':
-      'The backend creates the clinic, owner, API key, and trial subscription.',
+      'A simple path from your first sign-up to a more organized clinic.',
   'how.register.title': 'Create your clinic',
   'how.register.desc':
-      'Enter owner and clinic details, then choose a backend-provided specialty.',
+      'Tell us about your clinic and choose your medical specialty.',
   'how.center.title': 'Configure your workspace',
   'how.center.desc': 'Complete clinic settings and working preferences.',
   'how.doctors.title': 'Add your team',
@@ -158,21 +167,21 @@ const Map<String, String> landingEnUS = {
   'mobile.eyebrow': 'Mobile experience',
   'mobile.title': 'Your clinic, ready for the next screen',
   'mobile.subtitle':
-      'The responsive web experience works across phones and tablets. A dedicated mobile application is presented as upcoming until production app assets and release endpoints are supplied.',
+      'Keep your schedule and patient information close, on your phone or tablet. A dedicated mobile app is coming soon.',
   'mobile.badge': 'Responsive now · Native app upcoming',
   'mobile.item1': 'Fast access to the day’s schedule',
   'mobile.item2': 'Patient and appointment context on the move',
   'mobile.item3': 'Arabic and English layouts built in',
   'pricing.eyebrow': 'Flexible pricing',
-  'pricing.title': 'Plans that come directly from MedDesk',
+  'pricing.title': 'Room to grow. A plan to match.',
   'pricing.subtitle':
-      'Prices, discounts, features, duration, and limits are never hardcoded.',
+      'Find the right fit for your team, with clear features and flexible clinic plans.',
   'pricing.loading': 'Loading plans…',
   'pricing.load_error':
-      'We could not reach the MedDesk pricing service. Make sure the Laravel API is running, then try again.',
+      'We couldn’t load the plans right now. Please try again shortly.',
   'pricing.empty': 'No active plans are available right now.',
   'pricing.unavailable':
-      'Pricing will appear here when the Laravel backend exposes a public plans catalog.',
+      'Our plans will be available here soon. Please check back shortly.',
   'pricing.retry': 'Try again',
   'pricing.duration': '{days} days',
   'pricing.unlimited': 'Unlimited',
@@ -185,7 +194,7 @@ const Map<String, String> landingEnUS = {
   'pricing.discount_percentage': 'Save {value}%',
   'pricing.discount_fixed': 'Save {value} {currency}',
   'pricing.free': 'Free',
-  'pricing.live': 'Live from MedDesk',
+  'pricing.live': 'Clinic plans',
   'pricing.limits': 'Plan limits',
   'pricing.features': 'Included features',
   'pricing.feature.appointments': 'Appointment management',
@@ -199,9 +208,9 @@ const Map<String, String> landingEnUS = {
   'faq.eyebrow': 'FAQ',
   'faq.title': 'Clear answers before you start',
   'faq.subtitle': 'What clinics usually want to know about MedDesk.',
-  'faq.q1': 'Does the website create the subscription?',
+  'faq.q1': 'How does the free trial start?',
   'faq.a1':
-      'No. The Laravel backend selects and creates the default trial subscription.',
+      'Your clinic’s trial is created automatically after successful registration.',
   'faq.q2': 'Can a medical center manage multiple doctors?',
   'faq.a2': 'Yes. Center-type clinics can manage doctors and their schedules.',
   'faq.q3': 'Can receptionist access be controlled?',
@@ -214,7 +223,7 @@ const Map<String, String> landingEnUS = {
       'Yes. The marketing experience supports Arabic and English with RTL layouts.',
   'faq.q6': 'Is the mobile app available?',
   'faq.a6':
-      'The website is responsive today. The dedicated native app is marked upcoming until release details are available.',
+      'You can use MedDesk in your phone’s browser today. A dedicated mobile app is coming soon.',
   'contact.eyebrow': 'Let’s talk',
   'contact.title': 'See how MedDesk fits your clinic',
   'contact.subtitle':
@@ -227,11 +236,11 @@ const Map<String, String> landingEnUS = {
   'contact.message': 'How can we help?',
   'contact.submit': 'Request a demo',
   'contact.unavailable':
-      'Demo requests are not being sent yet because no public contact endpoint exists.',
+      'Demo requests are temporarily unavailable. Your request has not been sent. Please try again later.',
   'register.eyebrow': 'Start with MedDesk',
   'register.title': 'Create your clinic workspace',
   'register.subtitle':
-      'Your default trial is selected by the backend after successful registration.',
+      'Bring your team, appointments, and patient records into one workspace.',
   'register.full_name': 'Full name',
   'register.country': 'Country',
   'register.country_code': 'Country code',
@@ -262,9 +271,9 @@ const Map<String, String> landingEnUS = {
   'register.server_error':
       'Registration could not be completed. Please try again.',
   'cta.eyebrow': 'Ready when you are',
-  'cta.title': 'Give your clinic one clear place to work',
+  'cta.title': 'Less admin. More time for care.',
   'cta.subtitle':
-      'Start with the backend-managed free trial. No plan IDs or trial durations are stored in this website.',
+      'Give your team the clarity to do their best work. Start your MedDesk journey today.',
   'cta.primary': 'Start free trial',
   'cta.secondary': 'Login to clinic',
   'footer.column.product': 'Product',
@@ -286,6 +295,15 @@ const Map<String, String> landingEnUS = {
 };
 
 const Map<String, String> landingArAE = {
+  'nav.clients': 'عملاؤنا',
+  'hero.connected.title': 'فريق رعاية أكثر ترابطًا',
+  'hero.connected.desc': 'المرضى والمواعيد والسجلات في مكان واحد.',
+  'hero.preview': 'عرض توضيحي · اكتشف النظام في الجولة أدناه',
+  'hero.workspace': 'عيادتك، في لمحة واحدة',
+  'clients.eyebrow': 'عملاؤنا',
+  'clients.title': 'شركاء في رعاية أفضل.',
+  'clients.subtitle':
+      'تعرّف على العيادات وفرق الرعاية التي تستخدم MedDesk في عملها اليومي.',
   'nav.home': 'الرئيسية',
   'nav.features': 'المزايا',
   'nav.product': 'جولة في النظام',
@@ -307,7 +325,7 @@ const Map<String, String> landingArAE = {
       'يجمع MedDesk المرضى والمواعيد والسجلات الطبية والفوترة والفريق والتقارير والإشعارات في مساحة عمل واضحة.',
   'hero.cta.primary': 'ابدأ التجربة المجانية',
   'hero.cta.secondary': 'استكشف MedDesk',
-  'hero.trust': 'صلاحيات حسب الدور · عربي وإنجليزي · عزل آمن لبيانات العيادات',
+  'hero.trust': 'عربي وإنجليزي · بياناتك محمية · مصمم لفريقك',
   'trust.secure.title': 'صلاحيات حسب الدور',
   'trust.secure.desc': 'يرى المالك وموظف الاستقبال الأدوات المناسبة لعمله فقط.',
   'trust.tenant.title': 'عزل بيانات العيادات',
@@ -316,9 +334,10 @@ const Map<String, String> landingArAE = {
   'trust.language.desc': 'تجربة ثنائية اللغة تناسب فرق العمل في المنطقة.',
   'trust.scale.title': 'ينمو مع عيادتك',
   'trust.scale.desc': 'خطط وحدود مرنة تتوسع مع احتياجاتك.',
-  'services.eyebrow': 'إمكانات حقيقية',
-  'services.title': 'نظام واحد لإدارة العمل اليومي في العيادة',
-  'services.subtitle': 'مصمم حول مسارات العمل المدعومة فعليًا في MedDesk.',
+  'services.eyebrow': 'يوم أكثر هدوءًا في عيادتك',
+  'services.title': 'كل تفاصيل عيادتك، بتناغم.',
+  'services.subtitle':
+      'من أول موعد إلى آخر فاتورة، ساعد فريقك على التركيز على الأهم: مرضاك.',
   'services.doctor_mgmt.title': 'الأطباء والجداول',
   'services.doctor_mgmt.desc':
       'إدارة الأطباء وأيام العمل والجلسات والمواعيد والإجازات.',
@@ -338,7 +357,8 @@ const Map<String, String> landingArAE = {
       'إدارة موظفي الاستقبال والصلاحيات والدعم والإعدادات.',
   'features.eyebrow': 'منصة متكاملة',
   'features.title': 'مصمم حول رحلة المريض كاملة',
-  'features.subtitle': 'كل ميزة هنا مدعومة بالفعل داخل نظام MedDesk الحالي.',
+  'features.subtitle':
+      'أدوات مترابطة تضع المعلومات بين يدي فريقك في كل خطوة من رحلة الرعاية.',
   'features.booking.title': 'إدارة المواعيد',
   'features.booking.desc': 'إنشاء المواعيد وتعديلها ومتابعة حالتها.',
   'features.notifications.title': 'إشعارات واتساب',
@@ -360,11 +380,12 @@ const Map<String, String> landingArAE = {
   'features.support.desc': 'فتح التذاكر ومتابعة المحادثات وإرفاق الملفات.',
   'features.subscription.title': 'إدارة الاشتراكات',
   'features.subscription.desc':
-      'الخطط والمزايا والحدود وفترة التجربة يحددها الخادم.',
-  'features.tenant.title': 'عيادات متعددة المستأجرين',
-  'features.tenant.desc': 'مستخدمون وسجلات خاصة بكل عيادة لفصل العمليات.',
+      'تابع خطتك ومزاياها وحدود الاستخدام وحالة التجربة.',
+  'features.tenant.title': 'مساحة مستقلة لكل عيادة',
+  'features.tenant.desc':
+      'نظّم فريق كل عيادة وسجلاتها داخل مساحة العمل الخاصة بها.',
   'features.settings.title': 'إعدادات العيادة',
-  'features.settings.desc': 'تحديث الملف والتخصص ومفتاح API وإعدادات واتساب.',
+  'features.settings.desc': 'خصص ملف العيادة والتخصص وإعدادات واتساب.',
   'product.eyebrow': 'جولة في النظام',
   'product.title': 'مساحة عمل مركزة لكل دور',
   'product.subtitle': 'شاهد نماذج واقعية مبنية على وحدات لوحة التحكم الحالية.',
@@ -389,11 +410,10 @@ const Map<String, String> landingArAE = {
   'mock.waiting': 'انتظار',
   'mock.paid': 'مدفوع',
   'how.eyebrow': 'كيف يعمل',
-  'how.title': 'من الإعداد إلى إدارة العمل في أربع خطوات',
-  'how.subtitle':
-      'يتولى الخادم إنشاء العيادة والمالك ومفتاح API واشتراك التجربة.',
+  'how.title': 'خطوتك القادمة تبدأ هنا.',
+  'how.subtitle': 'خطوات بسيطة من إنشاء حسابك إلى عيادة أكثر تنظيمًا.',
   'how.register.title': 'أنشئ عيادتك',
-  'how.register.desc': 'أدخل بيانات المالك والعيادة واختر تخصصًا يرسله الخادم.',
+  'how.register.desc': 'أدخل بيانات عيادتك واختر تخصصك الطبي.',
   'how.center.title': 'اضبط مساحة العمل',
   'how.center.desc': 'أكمل إعدادات العيادة وتفضيلات العمل.',
   'how.doctors.title': 'أضف فريقك',
@@ -424,20 +444,18 @@ const Map<String, String> landingArAE = {
   'mobile.eyebrow': 'تجربة الهاتف',
   'mobile.title': 'عيادتك جاهزة لكل شاشة',
   'mobile.subtitle':
-      'تعمل تجربة الويب المتجاوبة على الهاتف والتابلت. التطبيق الأصلي مذكور كميزة قادمة حتى تتوفر أصول الإصدار وروابطه الرسمية.',
+      'تابع جدولك وبيانات مرضاك من الهاتف أو التابلت. وتطبيق الهاتف المخصص قادم قريبًا.',
   'mobile.badge': 'متجاوب الآن · التطبيق الأصلي قريبًا',
   'mobile.item1': 'وصول سريع إلى جدول اليوم',
   'mobile.item2': 'بيانات المرضى والمواعيد أثناء التنقل',
   'mobile.item3': 'واجهات عربية وإنجليزية مدمجة',
   'pricing.eyebrow': 'أسعار مرنة',
-  'pricing.title': 'خطط تأتي مباشرة من MedDesk',
-  'pricing.subtitle':
-      'لا يتم تثبيت الأسعار أو الخصومات أو المزايا أو المدد أو الحدود داخل الواجهة.',
+  'pricing.title': 'خطط تناسب عيادتك، وتنمو معها.',
+  'pricing.subtitle': 'اختر ما يناسب فريقك مع مزايا واضحة وخطط مرنة لعيادتك.',
   'pricing.loading': 'جارٍ تحميل الخطط…',
-  'pricing.load_error':
-      'تعذر الوصول إلى خدمة أسعار MedDesk. تأكد من تشغيل واجهة Laravel ثم حاول مرة أخرى.',
+  'pricing.load_error': 'تعذر تحميل الخطط الآن. يرجى المحاولة بعد قليل.',
   'pricing.empty': 'لا توجد خطط نشطة الآن.',
-  'pricing.unavailable': 'ستظهر الأسعار هنا عندما يتيح Laravel دليل خطط عامًا.',
+  'pricing.unavailable': 'ستتوفر خططنا هنا قريبًا. يرجى العودة بعد قليل.',
   'pricing.retry': 'إعادة المحاولة',
   'pricing.duration': '{days} يومًا',
   'pricing.unlimited': 'غير محدود',
@@ -450,7 +468,7 @@ const Map<String, String> landingArAE = {
   'pricing.discount_percentage': 'وفّر {value}٪',
   'pricing.discount_fixed': 'وفّر {value} {currency}',
   'pricing.free': 'مجاني',
-  'pricing.live': 'بيانات مباشرة من MedDesk',
+  'pricing.live': 'خطط العيادة',
   'pricing.limits': 'حدود الخطة',
   'pricing.features': 'المزايا المتضمنة',
   'pricing.feature.appointments': 'إدارة المواعيد',
@@ -464,8 +482,8 @@ const Map<String, String> landingArAE = {
   'faq.eyebrow': 'الأسئلة الشائعة',
   'faq.title': 'إجابات واضحة قبل أن تبدأ',
   'faq.subtitle': 'أهم ما تريد العيادات معرفته عن MedDesk.',
-  'faq.q1': 'هل ينشئ الموقع الاشتراك؟',
-  'faq.a1': 'لا. يختار خادم Laravel اشتراك التجربة الافتراضي وينشئه.',
+  'faq.q1': 'كيف تبدأ التجربة المجانية؟',
+  'faq.a1': 'تبدأ تجربة عيادتك تلقائيًا بعد إتمام التسجيل بنجاح.',
   'faq.q2': 'هل يستطيع المركز الطبي إدارة عدة أطباء؟',
   'faq.a2': 'نعم. تستطيع العيادات من نوع مركز إدارة الأطباء وجداولهم.',
   'faq.q3': 'هل يمكن التحكم في صلاحيات موظف الاستقبال؟',
@@ -476,7 +494,7 @@ const Map<String, String> landingArAE = {
   'faq.a5': 'نعم. يدعم الموقع العربية والإنجليزية واتجاه RTL بالكامل.',
   'faq.q6': 'هل تطبيق الهاتف متاح؟',
   'faq.a6':
-      'الموقع متجاوب الآن، والتطبيق الأصلي معلّم كقادم حتى تتوفر تفاصيل الإصدار.',
+      'يمكنك استخدام MedDesk من متصفح هاتفك الآن. وتطبيق الهاتف المخصص قادم قريبًا.',
   'contact.eyebrow': 'لنتحدث',
   'contact.title': 'اكتشف كيف يناسب MedDesk عيادتك',
   'contact.subtitle': 'أخبرنا عن عيادتك لنجهز محادثة مناسبة لاحتياجك.',
@@ -488,11 +506,10 @@ const Map<String, String> landingArAE = {
   'contact.message': 'كيف يمكننا مساعدتك؟',
   'contact.submit': 'اطلب عرضًا توضيحيًا',
   'contact.unavailable':
-      'لن يتم إرسال الطلب حاليًا لعدم وجود نقطة اتصال عامة في الخادم.',
+      'طلبات العرض التوضيحي غير متاحة مؤقتًا. لم يتم إرسال طلبك. يرجى المحاولة لاحقًا.',
   'register.eyebrow': 'ابدأ مع MedDesk',
   'register.title': 'أنشئ مساحة عمل عيادتك',
-  'register.subtitle':
-      'يحدد الخادم تجربة الاستخدام الافتراضية بعد نجاح التسجيل.',
+  'register.subtitle': 'اجمع فريقك ومواعيدك وسجلات مرضاك في مساحة عمل واحدة.',
   'register.full_name': 'الاسم الكامل',
   'register.country': 'الدولة',
   'register.country_code': 'كود الدولة',
@@ -522,9 +539,9 @@ const Map<String, String> landingArAE = {
       'تعذر الاتصال بـ MedDesk. تحقق من الشبكة وحاول مجددًا.',
   'register.server_error': 'تعذر إكمال التسجيل. حاول مرة أخرى.',
   'cta.eyebrow': 'جاهز عندما تكون مستعدًا',
-  'cta.title': 'امنح عيادتك مكانًا واحدًا وواضحًا للعمل',
+  'cta.title': 'إدارة أسهل. وقت أكثر للرعاية.',
   'cta.subtitle':
-      'ابدأ بالتجربة التي يديرها الخادم. لا يخزن الموقع معرف الخطة أو مدة التجربة.',
+      'امنح فريقك الوضوح الذي يحتاجه لتقديم أفضل رعاية. ابدأ رحلتك مع MedDesk اليوم.',
   'cta.primary': 'ابدأ التجربة المجانية',
   'cta.secondary': 'دخول العيادة',
   'footer.column.product': 'المنتج',

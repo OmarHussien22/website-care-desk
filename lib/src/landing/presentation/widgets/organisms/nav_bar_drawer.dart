@@ -1,19 +1,22 @@
-import 'package:coursaty/src/landing/core/theme/landing_colors.dart';
-import 'package:coursaty/src/landing/core/navigation/meddesk_actions.dart';
-import 'package:coursaty/src/landing/presentation/widgets/atoms/brand_logo.dart';
-import 'package:coursaty/src/landing/presentation/controllers/nav_bar_controller.dart';
-import 'package:coursaty/src/landing/presentation/widgets/organisms/language_toggle.dart';
-import 'package:coursaty/src/shared/presentation/widgets/general_widgets/text/custom_text_lib.dart';
+import '../../../data/landing_clients.dart';
+import '../../../core/theme/landing_colors.dart';
+import '../../../core/navigation/meddesk_actions.dart';
+import '../atoms/brand_logo.dart';
+import '../../controllers/nav_bar_controller.dart';
+import 'language_toggle.dart';
+import '../../../../shared/presentation/widgets/general_widgets/text/custom_text_lib.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-const List<({String labelKey, String sectionId})> _drawerLinks = [
+final List<({String labelKey, String sectionId})> _drawerLinks = [
   (labelKey: 'nav.services', sectionId: 'services'),
   (labelKey: 'nav.product', sectionId: 'product'),
   (labelKey: 'nav.features', sectionId: 'features'),
   (labelKey: 'nav.how_it_works', sectionId: 'how-it-works'),
   (labelKey: 'nav.for_clinicians', sectionId: 'audiences'),
   (labelKey: 'mobile.eyebrow', sectionId: 'mobile'),
+  if (LandingClients.items.isNotEmpty)
+    (labelKey: 'nav.clients', sectionId: 'clients'),
   (labelKey: 'nav.pricing', sectionId: 'pricing'),
   (labelKey: 'nav.faq', sectionId: 'faq'),
   (labelKey: 'nav.contact', sectionId: 'contact'),
@@ -30,7 +33,7 @@ class NavBarDrawer extends StatelessWidget {
 
     return GestureDetector(
       onVerticalDragEnd: (details) {
-        if (details.primaryVelocity != null && details.primaryVelocity! > 200) {
+        if ((details.primaryVelocity ?? 0) > 200) {
           _close(context, ctrl);
         }
       },
@@ -49,7 +52,15 @@ class NavBarDrawer extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const BrandLogo(height: 34),
+                    const Expanded(
+                      child: Align(
+                        alignment: AlignmentDirectional.centerStart,
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: BrandLogo(height: 34),
+                        ),
+                      ),
+                    ),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -99,7 +110,10 @@ class NavBarDrawer extends StatelessWidget {
                   vertical: 24,
                 ),
                 child: ElevatedButton(
-                  onPressed: MedDeskActions.openRegistration,
+                  onPressed: () {
+                    _close(context, ctrl);
+                    MedDeskActions.openRegistration();
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: LandingColors.accent,
                     foregroundColor: Colors.white,
@@ -154,7 +168,7 @@ class NavBarDrawer extends StatelessWidget {
     String? navigateTo,
   }) {
     ctrl.closeDrawer();
-    Navigator.of(context).pop();
+    Get.back<void>();
     if (navigateTo != null) {
       ctrl.navigateTo(navigateTo);
     }

@@ -61,5 +61,7 @@ class DarkColor extends ColorInterface {
   @override
   Color get textInverse => const Color(0xff0F172A);
   @override
+  Color get heroHighlight => const Color(0xffA7E8DD);
+  @override
   Color get success => const Color(0xff10B981);
 }

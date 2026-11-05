@@ -1,11 +1,11 @@
-import 'package:coursaty/src/landing/core/breakpoints/screen_size.dart';
-import 'package:coursaty/src/landing/core/scrolling/landing_scroll_controller.dart';
-import 'package:coursaty/src/landing/core/theme/landing_colors.dart';
-import 'package:coursaty/src/landing/core/typography/text_role.dart';
-import 'package:coursaty/src/landing/data/landing_metrics.dart';
-import 'package:coursaty/src/landing/presentation/sections/services/widgets/service_card.dart';
-import 'package:coursaty/src/landing/presentation/widgets/layout/section_wrapper.dart';
-import 'package:coursaty/src/shared/presentation/widgets/general_widgets/text/custom_text_lib.dart';
+import '../../../core/breakpoints/screen_size.dart';
+import '../../../core/scrolling/landing_scroll_controller.dart';
+import '../../../core/theme/landing_colors.dart';
+import '../../../core/spacing/app_spacing.dart';
+import '../../widgets/molecules/section_header.dart';
+import '../../../data/landing_metrics.dart';
+import 'widgets/service_card.dart';
+import '../../widgets/layout/section_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -34,7 +34,9 @@ class _ServicesSectionState extends State<ServicesSection> {
 
   @override
   void dispose() {
-    Get.find<LandingScrollController>().unregisterSection(_sectionId);
+    if (Get.isRegistered<LandingScrollController>()) {
+      Get.find<LandingScrollController>().unregisterSection(_sectionId);
+    }
     super.dispose();
   }
 
@@ -45,52 +47,15 @@ class _ServicesSectionState extends State<ServicesSection> {
       background: LandingColors.surfaceElevated,
       child: Column(
         children: [
-          const _ServicesHeader(),
-          const SizedBox(height: 48),
+          const SectionHeader(
+            eyebrowKey: 'services.eyebrow',
+            titleKey: 'services.title',
+            subtitleKey: 'services.subtitle',
+          ),
+          SizedBox(height: AppSpacing.lg.resolve(context)),
           _ServicesGrid(size: ScreenSizeX.of(context)),
         ],
       ),
-    );
-  }
-}
-
-class _ServicesHeader extends StatelessWidget {
-  const _ServicesHeader();
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomText(
-          'services.eyebrow'.tr,
-          scaleFont: false,
-          fontSize: 13,
-          fontWeight: FW.semiBold,
-          fontFamily: 'Montserrat',
-          color: LandingColors.accent,
-          letterSpacing: 0.6,
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 14),
-        CustomText(
-          'services.title'.tr,
-          role: TextRole.displayLG,
-          fontWeight: FW.bold,
-          fontFamily: 'Montserrat',
-          color: LandingColors.textPrimary,
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 14),
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 560),
-          child: CustomText(
-            'services.subtitle'.tr,
-            role: TextRole.bodyLG,
-            color: LandingColors.textSecondary,
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
     );
   }
 }
@@ -116,7 +81,7 @@ class _ServicesGrid extends StatelessWidget {
         children: [
           for (int i = 0; i < services.length; i++) ...[
             if (i > 0) const SizedBox(height: gap),
-            ServiceCard(item: services[i]),
+            ServiceCard(item: services[i], featured: i == 0, index: i),
           ],
         ],
       );
@@ -130,10 +95,14 @@ class _ServicesGrid extends StatelessWidget {
           spacing: gap,
           runSpacing: gap,
           children: [
-            for (final item in services)
+            for (int index = 0; index < services.length; index++)
               SizedBox(
                 width: itemWidth,
-                child: ServiceCard(item: item),
+                child: ServiceCard(
+                  item: services[index],
+                  featured: index == 0,
+                  index: index,
+                ),
               ),
           ],
         );

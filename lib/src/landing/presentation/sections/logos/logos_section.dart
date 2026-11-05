@@ -1,66 +1,45 @@
-import 'package:coursaty/src/landing/core/scrolling/landing_scroll_controller.dart';
+import 'package:coursaty/src/landing/core/breakpoints/responsive.dart';
+import 'package:coursaty/src/landing/core/spacing/app_spacing.dart';
 import 'package:coursaty/src/landing/core/theme/landing_colors.dart';
-import 'package:coursaty/src/landing/core/typography/text_role.dart';
-import 'package:coursaty/src/landing/data/landing_content.dart';
-import 'package:coursaty/src/landing/presentation/sections/logos/widgets/logo_tile.dart';
-import 'package:coursaty/src/landing/presentation/widgets/layout/section_wrapper.dart';
-import 'package:coursaty/src/shared/presentation/widgets/general_widgets/text/custom_text_lib.dart';
+import 'package:coursaty/src/landing/data/landing_clients.dart';
+import 'package:coursaty/src/landing/presentation/widgets/layout/anchored_section.dart';
+import 'package:coursaty/src/landing/presentation/widgets/layout/responsive_grid.dart';
+import 'package:coursaty/src/landing/presentation/widgets/molecules/section_header.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-/// Slim social-proof band: a caption above a reflowing wall of partner marks.
-/// Self-registers anchor id `logos` with [LandingScrollController].
-class LogosSection extends StatefulWidget {
-  const LogosSection({super.key});
+import 'widgets/logo_tile.dart';
 
-  @override
-  State<LogosSection> createState() => _LogosSectionState();
-}
-
-class _LogosSectionState extends State<LogosSection> {
-  static const String _sectionId = 'logos';
-  final GlobalKey _key = GlobalKey();
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        Get.find<LandingScrollController>().registerSection(_sectionId, _key);
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    Get.find<LandingScrollController>().unregisterSection(_sectionId);
-    super.dispose();
-  }
+/// Only confirmed client identities are shown as social proof.
+class LogosSection extends StatelessWidget {
+  const LogosSection({super.key, this.clients = LandingClients.items});
+  final List<LandingClient> clients;
 
   @override
   Widget build(BuildContext context) {
-    return SectionWrapper(
-      sectionKey: _key,
-      background: LandingColors.surfaceMuted,
+    if (clients.isEmpty) return const SizedBox.shrink();
+
+    return AnchoredSection(
+      sectionId: 'clients',
+      background: LandingColors.surfaceElevated,
+      verticalPadding: AppSpacing.xl,
       child: Column(
         children: [
-          CustomText(
-            'logos.caption'.tr,
-            role: TextRole.bodyMD,
-            fontWeight: FW.semiBold,
-            color: LandingColors.textSecondary,
-            textAlign: TextAlign.center,
-            letterSpacing: 0.4,
+          const SectionHeader(
+            eyebrowKey: 'clients.eyebrow',
+            titleKey: 'clients.title',
+            subtitleKey: 'clients.subtitle',
           ),
-          const SizedBox(height: 32),
-          Wrap(
-            alignment: WrapAlignment.center,
-            runAlignment: WrapAlignment.center,
-            spacing: 16,
-            runSpacing: 16,
-            children: [
-              for (final mark in LandingContent.logos) LogoTile(mark: mark),
-            ],
+          SizedBox(height: AppSpacing.lg.resolve(context)),
+          ResponsiveGrid(
+            columns: Responsive<int>(
+              mobile: 1,
+              tablet: clients.length.clamp(1, 2),
+              laptop: clients.length.clamp(1, 3),
+              desktop: clients.length.clamp(1, 4),
+            ),
+            mainAxisSpacing: AppSpacing.md.resolve(context),
+            crossAxisSpacing: AppSpacing.md.resolve(context),
+            children: [for (final client in clients) LogoTile(client: client)],
           ),
         ],
       ),

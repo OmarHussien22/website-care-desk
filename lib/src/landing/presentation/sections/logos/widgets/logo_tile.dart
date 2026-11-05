@@ -1,63 +1,76 @@
+import 'package:coursaty/src/core/services/utils/extensions/screen_spaces_extension.dart';
+import 'package:coursaty/src/landing/core/spacing/app_spacing.dart';
 import 'package:coursaty/src/landing/core/theme/landing_colors.dart';
-import 'package:coursaty/src/landing/data/landing_content.dart';
+import 'package:coursaty/src/landing/core/typography/text_role.dart';
+import 'package:coursaty/src/landing/data/landing_clients.dart';
 import 'package:coursaty/src/shared/presentation/widgets/general_widgets/text/custom_text_lib.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-/// A placeholder partner mark — icon + wordmark in a soft pill.
-/// Reads as a muted logo wall; swaps to a real `Image.asset`/SVG later.
-class LogoTile extends StatefulWidget {
-  const LogoTile({super.key, required this.mark});
-
-  final LogoMark mark;
-
-  @override
-  State<LogoTile> createState() => _LogoTileState();
-}
-
-class _LogoTileState extends State<LogoTile> {
-  bool _hovered = false;
+class LogoTile extends StatelessWidget {
+  const LogoTile({super.key, required this.client});
+  final LandingClient client;
 
   @override
   Widget build(BuildContext context) {
-    final color = LandingColors.textSecondary.withValues(
-      alpha: _hovered ? 0.95 : 0.55,
+    final arabic = Get.locale?.languageCode == 'ar';
+    final name = arabic ? client.nameAr : client.nameEn;
+    final description = arabic ? client.descriptionAr : client.descriptionEn;
+    final asset = client.logoAsset;
+    final logoSize = AppSpacing.xl.resolve(context);
+    final fallback = Icon(
+      Icons.local_hospital_outlined,
+      color: LandingColors.accent,
+      size: 28.toRad().clamp(24, 36),
     );
 
-    return MouseRegion(
-      onEnter: (_) => setState(() => _hovered = true),
-      onExit: (_) => setState(() => _hovered = false),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 180),
-        curve: Curves.easeOutCubic,
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-        decoration: BoxDecoration(
-          color: LandingColors.surfaceElevated.withValues(
-            alpha: _hovered ? 1 : 0.6,
+    return Container(
+      padding: EdgeInsets.all(AppSpacing.md.resolve(context)),
+      decoration: BoxDecoration(
+        color: LandingColors.surfaceMuted,
+        borderRadius: BorderRadius.circular(AppSpacing.md.resolve(context)),
+        border: Border.all(color: LandingColors.borderSubtle),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: logoSize,
+            width: double.infinity,
+            child: asset == null
+                ? fallback
+                : asset.toLowerCase().endsWith('.svg')
+                ? SvgPicture.asset(
+                    asset,
+                    fit: BoxFit.contain,
+                    semanticsLabel: name,
+                    errorBuilder: (_, _, _) => fallback,
+                  )
+                : Image.asset(
+                    asset,
+                    fit: BoxFit.contain,
+                    semanticLabel: name,
+                    errorBuilder: (_, _, _) => fallback,
+                  ),
           ),
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(
-            color: LandingColors.borderSubtle.withValues(
-              alpha: _hovered ? 1 : 0.6,
-            ),
+          SizedBox(height: AppSpacing.sm.resolve(context)),
+          CustomText(
+            name,
+            role: TextRole.headingSM,
+            color: LandingColors.textPrimary,
+            textAlign: TextAlign.center,
           ),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(widget.mark.icon, size: 22, color: color),
-            const SizedBox(width: 10),
+          if (description != null && description.isNotEmpty) ...[
+            SizedBox(height: AppSpacing.xs.resolve(context)),
             CustomText(
-              widget.mark.labelKey.tr,
-              scaleFont: false,
-              fontSize: 16,
-              fontWeight: FW.bold,
-              fontFamily: 'Montserrat',
-              color: color,
-              letterSpacing: 0.2,
+              description,
+              role: TextRole.bodySM,
+              color: LandingColors.textSecondary,
+              textAlign: TextAlign.center,
             ),
           ],
-        ),
+        ],
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:coursaty/src/landing/presentation/sections/logos/logos_section.dart';
 import 'package:coursaty/src/landing/core/animations/fade_in_on_scroll.dart';
 import 'package:coursaty/src/landing/core/scrolling/landing_scroll_controller.dart';
 import 'package:coursaty/src/landing/core/theme/landing_colors.dart';
@@ -33,6 +34,8 @@ class LandingPage extends StatelessWidget {
               SliverToBoxAdapter(
                 child: FadeInOnScroll(child: const TrustStripSection()),
               ),
+
+              const SliverToBoxAdapter(child: LogosSection()),
 
               // § 2 — Services (Phase 3)
               SliverToBoxAdapter(

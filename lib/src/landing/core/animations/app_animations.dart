@@ -6,7 +6,7 @@ abstract final class AppAnimations {
   static const fast = Duration(milliseconds: 200);
   static const medium = Duration(milliseconds: 400);
   static const slow = Duration(milliseconds: 700);
-  static const entrance = Duration(milliseconds: 900);
+  static const entrance = Duration(milliseconds: 560);
 
   // Curves
   static const standard = Curves.easeInOutCubic;

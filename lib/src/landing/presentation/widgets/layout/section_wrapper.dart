@@ -59,21 +59,21 @@ class SectionWrapper extends StatelessWidget {
     // the screen edge (e.g. between 1024px and the 1440px MaxContentWidth cap).
     final hPad = AppSpacing.page.resolveForSize(size);
 
-    final innerContent = Padding(
-      padding: EdgeInsets.symmetric(horizontal: hPad),
-      child: child,
-    );
-
     final wrappedContent = animationWrapper != null
-        ? animationWrapper!(innerContent)
-        : innerContent;
+        ? animationWrapper!(child)
+        : child;
 
     final body = Container(
       key: sectionKey,
       width: double.infinity,
       color: decoration == null ? background : null,
       decoration: decoration,
-      padding: EdgeInsets.only(top: vPad + topPaddingExtra, bottom: vPad),
+      padding: EdgeInsets.only(
+        top: vPad + topPaddingExtra,
+        bottom: vPad,
+        left: hPad,
+        right: hPad,
+      ),
       child: MaxContentWidth(child: wrappedContent),
     );
 

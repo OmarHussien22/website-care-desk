@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:coursaty/src/landing/core/url_sync/landing_url_sync.dart';
-import 'package:flutter/rendering.dart';
+import '../url_sync/landing_url_sync.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
@@ -20,6 +19,8 @@ class LandingScrollController extends GetxController {
 
   // Hysteresis: only commit a new id if it holds for 150ms.
   Timer? _hysteresisTimer;
+  Timer? _deepLinkTimer;
+  Timer? _scrollThrottle;
   String? _pendingSectionId;
 
   @override
@@ -38,7 +39,7 @@ class LandingScrollController extends GetxController {
     });
 
     // Deep-link: wait for sections to register before jumping.
-    Timer(const Duration(milliseconds: 500), () {
+    _deepLinkTimer = Timer(const Duration(milliseconds: 500), () {
       final hash = _urlSync.currentHash;
       if (hash != null) {
         if (_sectionKeys.containsKey(hash)) {
@@ -72,9 +73,13 @@ class LandingScrollController extends GetxController {
     final context = key.currentContext;
     if (context == null) return;
 
+    final reducedMotion = MediaQuery.disableAnimationsOf(context);
+
     await Scrollable.ensureVisible(
       context,
-      duration: duration ?? const Duration(milliseconds: 700),
+      duration: reducedMotion
+          ? Duration.zero
+          : duration ?? const Duration(milliseconds: 500),
       curve: curve ?? Curves.easeInOutCubic,
     );
 
@@ -82,7 +87,12 @@ class LandingScrollController extends GetxController {
   }
 
   void _onScroll() {
-    _detectActiveSection();
+    // Avoid querying every section's global geometry on every scroll tick.
+    if (_scrollThrottle?.isActive ?? false) return;
+    _scrollThrottle = Timer(
+      const Duration(milliseconds: 80),
+      _detectActiveSection,
+    );
   }
 
   void _detectActiveSection() {
@@ -137,6 +147,8 @@ class LandingScrollController extends GetxController {
   @override
   void onClose() {
     _hysteresisTimer?.cancel();
+    _deepLinkTimer?.cancel();
+    _scrollThrottle?.cancel();
     scrollController.removeListener(_onScroll);
     scrollController.dispose();
     _urlSync.dispose();
