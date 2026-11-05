@@ -1,4 +1,4 @@
-import 'package:coursaty/src/landing/core/animations/app_animations.dart';
+import 'app_animations.dart';
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -34,7 +34,6 @@ class _FadeInOnScrollState extends State<FadeInOnScroll>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _opacity;
-  late Animation<Offset> _slide;
   bool _triggered = false;
 
   @override
@@ -42,14 +41,10 @@ class _FadeInOnScrollState extends State<FadeInOnScroll>
     super.initState();
     _controller = AnimationController(vsync: this, duration: widget.duration);
     _opacity = CurvedAnimation(parent: _controller, curve: widget.curve);
-    _slide = Tween<Offset>(
-      begin: Offset(0, widget.slideOffset / 100),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(parent: _controller, curve: widget.curve));
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
-    if (_triggered) return;
+    if (_triggered || !mounted) return;
     if (info.visibleFraction > 0.05) {
       _triggered = true;
       if (widget.delay == Duration.zero) {
@@ -79,7 +74,14 @@ class _FadeInOnScrollState extends State<FadeInOnScroll>
       onVisibilityChanged: _onVisibilityChanged,
       child: FadeTransition(
         opacity: _opacity,
-        child: SlideTransition(position: _slide, child: widget.child),
+        child: AnimatedBuilder(
+          animation: _opacity,
+          builder: (context, child) => Transform.translate(
+            offset: Offset(0, widget.slideOffset * (1 - _opacity.value)),
+            child: child,
+          ),
+          child: RepaintBoundary(child: widget.child),
+        ),
       ),
     );
   }

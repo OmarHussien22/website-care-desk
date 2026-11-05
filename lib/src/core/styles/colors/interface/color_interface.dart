@@ -226,6 +226,7 @@ abstract class ColorInterface {
   Color get textPrimary;
   Color get textSecondary;
   Color get textInverse;
+  Color get heroHighlight;
 
   LinearGradient get defaultLinearColor => LinearGradient(
     begin: Alignment.bottomLeft,

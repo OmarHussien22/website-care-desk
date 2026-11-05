@@ -1,4 +1,4 @@
-import 'package:coursaty/src/landing/core/animations/app_animations.dart';
+import 'app_animations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,7 @@ class _HoverScaleState extends State<HoverScale> {
 
   @override
   Widget build(BuildContext context) {
-    if (!kIsWeb) return widget.child;
+    if (!kIsWeb || MediaQuery.disableAnimationsOf(context)) return widget.child;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _hovered = true),

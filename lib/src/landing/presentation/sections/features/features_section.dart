@@ -1,110 +1,127 @@
-import 'package:coursaty/src/landing/core/animations/fade_in_on_scroll.dart';
-import 'package:coursaty/src/landing/core/breakpoints/screen_size.dart';
-import 'package:coursaty/src/landing/core/scrolling/landing_scroll_controller.dart';
-import 'package:coursaty/src/landing/core/theme/landing_colors.dart';
-import 'package:coursaty/src/landing/data/landing_content.dart';
-import 'package:coursaty/src/landing/presentation/sections/features/widgets/feature_row.dart';
-import 'package:coursaty/src/landing/presentation/widgets/layout/section_wrapper.dart';
-import 'package:coursaty/src/landing/presentation/widgets/molecules/product_screenshot.dart';
-import 'package:coursaty/src/landing/presentation/widgets/molecules/section_header.dart';
+import '../../../core/breakpoints/screen_size.dart';
+import '../../../core/navigation/meddesk_actions.dart';
+import '../../../core/spacing/app_spacing.dart';
+import '../../../core/theme/landing_colors.dart';
+import '../../../core/typography/text_role.dart';
+import '../../../data/landing_content.dart';
+import '../../widgets/atoms/app_button.dart';
+import '../../widgets/layout/anchored_section.dart';
+import '../../widgets/molecules/section_header.dart';
+import '../../../../shared/presentation/widgets/general_widgets/text/custom_text_lib.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// Features section — app preview beside a labelled feature list.
-/// Two-column at laptop+, stacked (preview on top) at tablet/mobile.
-/// Self-registers anchor id `features` with [LandingScrollController].
-class FeaturesSection extends StatefulWidget {
+/// An editorial overview and compact capability matrix avoid a long repeated list.
+class FeaturesSection extends StatelessWidget {
   const FeaturesSection({super.key});
 
   @override
-  State<FeaturesSection> createState() => _FeaturesSectionState();
-}
-
-class _FeaturesSectionState extends State<FeaturesSection> {
-  static const String _sectionId = 'features';
-  final GlobalKey _key = GlobalKey();
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        Get.find<LandingScrollController>().registerSection(_sectionId, _key);
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    Get.find<LandingScrollController>().unregisterSection(_sectionId);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final size = ScreenSizeX.of(context);
-    final isWide = size.isLaptopOrLarger;
-
-    return SectionWrapper(
-      sectionKey: _key,
-      background: LandingColors.surfaceElevated,
-      child: Column(
-        children: [
-          const SectionHeader(
-            eyebrowKey: 'features.eyebrow',
-            titleKey: 'features.title',
-            subtitleKey: 'features.subtitle',
-          ),
-          const SizedBox(height: 56),
-          isWide
-              ? Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    Expanded(
-                      flex: 5,
-                      child: ProductScreenshot(
-                        screen: ProductScreen.patients,
-                        altTextKey: 'product.patients',
-                      ),
-                    ),
-                    SizedBox(width: 56),
-                    Expanded(flex: 6, child: _FeatureList()),
-                  ],
-                )
-              : Column(
-                  children: const [
-                    ProductScreenshot(
-                      screen: ProductScreen.patients,
-                      altTextKey: 'product.patients',
-                    ),
-                    SizedBox(height: 40),
-                    _FeatureList(),
-                  ],
-                ),
-        ],
-      ),
-    );
-  }
-}
-
-class _FeatureList extends StatelessWidget {
-  const _FeatureList();
-
-  @override
-  Widget build(BuildContext context) {
-    final features = LandingContent.features;
-    return Column(
+    final wide = ScreenSizeX.of(context).isLaptopOrLarger;
+    final gap = AppSpacing.lg.resolve(context);
+    final introduction = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        for (int i = 0; i < features.length; i++) ...[
-          if (i > 0) const SizedBox(height: 6),
-          FadeInOnScroll(
-            delay: Duration(milliseconds: 70 * i),
-            slideOffset: 16,
-            child: FeatureRow(item: features[i]),
-          ),
-        ],
+        const EyebrowPill(labelKey: 'features.eyebrow'),
+        SizedBox(height: AppSpacing.md.resolve(context)),
+        CustomText(
+          'features.title'.tr,
+          role: TextRole.displayLG,
+          color: LandingColors.textPrimary,
+        ),
+        SizedBox(height: AppSpacing.md.resolve(context)),
+        CustomText(
+          'features.subtitle'.tr,
+          role: TextRole.bodyLG,
+          color: LandingColors.textSecondary,
+        ),
+        SizedBox(height: AppSpacing.md.resolve(context)),
+        AppButton(
+          label: 'hero.cta.primary'.tr,
+          onPressed: MedDeskActions.openRegistration,
+          trailingIcon: const Icon(Icons.arrow_forward_rounded),
+        ),
       ],
     );
+    return AnchoredSection(
+      sectionId: 'features',
+      background: LandingColors.surfaceMuted,
+      child: wide
+          ? Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(flex: 4, child: introduction),
+                SizedBox(width: gap),
+                const Expanded(flex: 7, child: _CapabilityGrid()),
+              ],
+            )
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                introduction,
+                SizedBox(height: gap),
+                const _CapabilityGrid(),
+              ],
+            ),
+    );
   }
+}
+
+class _CapabilityGrid extends StatelessWidget {
+  const _CapabilityGrid();
+
+  @override
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, constraints) {
+      final gap = AppSpacing.sm.resolve(context);
+      final columns = ScreenSizeX.of(context).isMobile ? 1 : 2;
+      final width = (constraints.maxWidth - gap * (columns - 1)) / columns;
+      return Wrap(
+        spacing: gap,
+        runSpacing: gap,
+        children: [
+          for (final feature in LandingContent.features)
+            SizedBox(
+              width: width,
+              child: Container(
+                padding: EdgeInsets.all(AppSpacing.sm.resolve(context)),
+                decoration: BoxDecoration(
+                  color: LandingColors.surfaceElevated,
+                  borderRadius: BorderRadius.circular(
+                    AppSpacing.sm.resolve(context),
+                  ),
+                  border: Border.all(color: LandingColors.borderSubtle),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(feature.icon, color: LandingColors.accentGradientEnd),
+                    SizedBox(width: AppSpacing.sm.resolve(context)),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            feature.titleKey.tr,
+                            role: TextRole.bodySM,
+                            fontWeight: FW.semiBold,
+                            color: LandingColors.textPrimary,
+                          ),
+                          SizedBox(height: AppSpacing.xxs.resolve(context)),
+                          CustomText(
+                            feature.descKey.tr,
+                            role: TextRole.caption,
+                            color: LandingColors.textSecondary,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        ],
+      );
+    },
+  );
 }

@@ -51,6 +51,4 @@ abstract class PaginationController<T> extends GetControllerInterface<T> {
     scrollController = ScrollController();
     scrollListen();
   }
-
-  // TODO: disopse scroll controller
 }

@@ -81,18 +81,10 @@ flutter:
     - assets/images/brand/
     - assets/images/hero/
     - assets/images/social/
-    - assets/fonts/uRW/
-    - assets/fonts/montserrat/
 
   fonts:
     - family: URW
       fonts:
-        - asset: assets/fonts/uRW/uRW_Thin.ttf
-          weight: 100
-        - asset: assets/fonts/uRW/uRW_Light.ttf
-          weight: 200
-        - asset: assets/fonts/uRW/uRW_XLight.ttf
-          weight: 300
         - asset: assets/fonts/uRW/uRW_regular.ttf
           weight: 400
         - asset: assets/fonts/uRW/uRW_Medium.ttf
@@ -101,16 +93,8 @@ flutter:
           weight: 600
         - asset: assets/fonts/uRW/uRW_Bold.ttf
           weight: 700
-        - asset: assets/fonts/uRW/uRW_Black.ttf
-          weight: 900
     - family: Montserrat
       fonts:
-        - asset: assets/fonts/montserrat/montserrat-Thin.ttf
-          weight: 100
-        - asset: assets/fonts/montserrat/montserrat-ExtraLight.ttf
-          weight: 200
-        - asset: assets/fonts/montserrat/montserrat-Light.ttf
-          weight: 300
         - asset: assets/fonts/montserrat/montserrat-Regular.ttf
           weight: 400
         - asset: assets/fonts/montserrat/montserrat-Medium.ttf
@@ -119,7 +103,3 @@ flutter:
           weight: 600
         - asset: assets/fonts/montserrat/montserrat-Bold.ttf
           weight: 700
-        - asset: assets/fonts/montserrat/montserrat-ExtraBold.ttf
-          weight: 800
-        - asset: assets/fonts/montserrat/montserrat-Black.ttf
-          weight: 900

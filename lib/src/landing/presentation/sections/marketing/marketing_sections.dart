@@ -1,15 +1,15 @@
-import 'package:coursaty/src/core/app/meddesk_config.dart';
-import 'package:coursaty/src/landing/core/breakpoints/responsive.dart';
-import 'package:coursaty/src/landing/core/breakpoints/screen_size.dart';
-import 'package:coursaty/src/landing/core/navigation/meddesk_actions.dart';
-import 'package:coursaty/src/landing/core/theme/landing_colors.dart';
-import 'package:coursaty/src/landing/core/typography/text_role.dart';
-import 'package:coursaty/src/landing/data/landing_content.dart';
-import 'package:coursaty/src/landing/presentation/widgets/layout/anchored_section.dart';
-import 'package:coursaty/src/landing/presentation/widgets/layout/responsive_grid.dart';
-import 'package:coursaty/src/landing/presentation/widgets/molecules/product_screenshot.dart';
-import 'package:coursaty/src/landing/presentation/widgets/molecules/section_header.dart';
-import 'package:coursaty/src/shared/presentation/widgets/general_widgets/text/custom_text_lib.dart';
+import '../../../../core/app/meddesk_config.dart';
+import '../../../core/breakpoints/responsive.dart';
+import '../../../core/breakpoints/screen_size.dart';
+import '../../../core/navigation/meddesk_actions.dart';
+import '../../../core/theme/landing_colors.dart';
+import '../../../core/typography/text_role.dart';
+import '../../../data/landing_content.dart';
+import '../../widgets/layout/anchored_section.dart';
+import '../../widgets/layout/responsive_grid.dart';
+import '../../widgets/molecules/product_screenshot.dart';
+import '../../widgets/molecules/section_header.dart';
+import '../../../../shared/presentation/widgets/general_widgets/text/custom_text_lib.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -172,7 +172,9 @@ class _ProductTourSectionState extends State<ProductTourSection> {
         ),
         const SizedBox(height: 28.0),
         AnimatedSwitcher(
-          duration: const Duration(milliseconds: 260),
+          duration: MediaQuery.disableAnimationsOf(context)
+              ? Duration.zero
+              : const Duration(milliseconds: 260),
           child: ProductScreenshot(
             key: ValueKey(selected),
             screen: selected,

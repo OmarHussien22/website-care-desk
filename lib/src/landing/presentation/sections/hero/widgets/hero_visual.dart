@@ -1,23 +1,136 @@
-import 'package:coursaty/src/landing/core/breakpoints/screen_size.dart';
-import 'package:coursaty/src/landing/presentation/widgets/molecules/product_screenshot.dart';
+import '../../../../core/animations/fade_in_on_scroll.dart';
+import '../../../../core/spacing/app_spacing.dart';
+import '../../../../core/theme/landing_colors.dart';
+import '../../../../core/typography/text_role.dart';
+import '../../../widgets/molecules/product_screenshot.dart';
+import '../../../../../shared/presentation/widgets/general_widgets/text/custom_text_lib.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-/// Right visual column of the hero section.
-/// Wraps the illustration in a soft white frame with a tinted glow so it
-/// lifts off the gradient background.
+/// Composited, finite entrances around a cached vector product preview.
 class HeroVisual extends StatelessWidget {
   const HeroVisual({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = ScreenSizeX.of(context) == ScreenSize.mobile;
-    return Transform.rotate(
-      angle: isMobile ? 0.0 : -0.012,
-      child: const ProductScreenshot(
-        frameType: ProductFrameType.browser,
-        screen: ProductScreen.dashboard,
-        altTextKey: 'product.dashboard',
-      ),
+    final gap = AppSpacing.md.resolve(context);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: EdgeInsets.all(gap),
+          decoration: BoxDecoration(
+            color: LandingColors.heroHighlight.withValues(alpha: 0.34),
+            borderRadius: BorderRadius.circular(AppSpacing.lg.resolve(context)),
+            border: Border.all(
+              color: LandingColors.accent.withValues(alpha: 0.09),
+            ),
+          ),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(AppSpacing.xs.resolve(context)),
+                    decoration: BoxDecoration(
+                      color: LandingColors.surfaceElevated,
+                      borderRadius: BorderRadius.circular(
+                        AppSpacing.sm.resolve(context),
+                      ),
+                    ),
+                    child: Icon(
+                      Icons.space_dashboard_outlined,
+                      color: LandingColors.accent,
+                    ),
+                  ),
+                  SizedBox(width: AppSpacing.sm.resolve(context)),
+                  Expanded(
+                    child: CustomText(
+                      'hero.workspace'.tr,
+                      role: TextRole.caption,
+                      color: LandingColors.accent,
+                    ),
+                  ),
+                  Icon(Icons.more_horiz_rounded, color: LandingColors.accent),
+                ],
+              ),
+              SizedBox(height: gap),
+              FadeInOnScroll(
+                delay: const Duration(milliseconds: 160),
+                child: Transform.rotate(
+                  angle: -0.025,
+                  child: const AspectRatio(
+                    aspectRatio: 1.5,
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: SizedBox(
+                        width: ProductScreenshot.previewWidth,
+                        child: ProductScreenshot(useCompactLayout: false),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: gap),
+              Container(
+                padding: EdgeInsets.all(AppSpacing.sm.resolve(context)),
+                decoration: BoxDecoration(
+                  color: LandingColors.surfaceElevated,
+                  borderRadius: BorderRadius.circular(
+                    AppSpacing.sm.resolve(context),
+                  ),
+                  border: Border.all(color: LandingColors.borderSubtle),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(AppSpacing.xs.resolve(context)),
+                      decoration: BoxDecoration(
+                        color: LandingColors.success.withValues(alpha: 0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.check_rounded,
+                        color: LandingColors.success,
+                      ),
+                    ),
+                    SizedBox(width: AppSpacing.sm.resolve(context)),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            'hero.connected.title'.tr,
+                            role: TextRole.bodySM,
+                            fontWeight: FW.semiBold,
+                            color: LandingColors.textPrimary,
+                          ),
+                          CustomText(
+                            'hero.connected.desc'.tr,
+                            role: TextRole.caption,
+                            color: LandingColors.textSecondary,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(
+                      Icons.auto_awesome_outlined,
+                      color: LandingColors.secondary,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: AppSpacing.sm.resolve(context)),
+        CustomText(
+          'hero.preview'.tr,
+          role: TextRole.caption,
+          color: LandingColors.textSecondary,
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 }

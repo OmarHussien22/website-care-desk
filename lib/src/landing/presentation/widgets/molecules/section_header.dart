@@ -1,6 +1,6 @@
-import 'package:coursaty/src/landing/core/theme/landing_colors.dart';
-import 'package:coursaty/src/landing/core/typography/text_role.dart';
-import 'package:coursaty/src/shared/presentation/widgets/general_widgets/text/custom_text_lib.dart';
+import '../../../core/theme/landing_colors.dart';
+import '../../../core/typography/text_role.dart';
+import '../../../../shared/presentation/widgets/general_widgets/text/custom_text_lib.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -79,14 +79,16 @@ class EyebrowPill extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          CustomText(
-            labelKey.tr,
-            scaleFont: false,
-            fontSize: 12.5,
-            fontWeight: FW.semiBold,
-            fontFamily: 'Montserrat',
-            color: LandingColors.accent,
-            letterSpacing: 0.6,
+          Flexible(
+            child: CustomText(
+              labelKey.tr,
+              scaleFont: false,
+              fontSize: 12.5,
+              fontWeight: FW.semiBold,
+              fontFamily: 'Montserrat',
+              color: LandingColors.accent,
+              letterSpacing: 0.6,
+            ),
           ),
         ],
       ),

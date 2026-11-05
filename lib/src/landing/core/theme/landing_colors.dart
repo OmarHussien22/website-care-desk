@@ -13,6 +13,8 @@ abstract final class LandingColors {
   static Color get textPrimary => AppColors.get.textPrimary;
   static Color get textSecondary => AppColors.get.textSecondary;
   static Color get textInverse => AppColors.get.textInverse;
+  static Color get onBrand => AppColors.get.white;
+  static Color get heroHighlight => AppColors.get.heroHighlight;
 
   static LinearGradient get accentGradient => LinearGradient(
     begin: Alignment.topLeft,

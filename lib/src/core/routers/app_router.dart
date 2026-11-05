@@ -1,6 +1,7 @@
-import 'package:coursaty/src/landing/presentation/pages/landing_binding.dart';
-import 'package:coursaty/src/landing/presentation/pages/landing_page.dart';
-import 'package:coursaty/src/features/clinic_onboarding/presentation/pages/clinic_registration_page.dart';
+import '../../landing/presentation/pages/landing_binding.dart';
+import '../../landing/presentation/pages/landing_page.dart';
+import '../../landing/presentation/widgets/organisms/nav_bar_drawer.dart';
+import '../../features/clinic_onboarding/presentation/pages/clinic_registration_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'app_routes.dart';
@@ -8,6 +9,11 @@ import 'app_routes.dart';
 class AppRouter {
   // All pages registered here
   static final List<GetPage<dynamic>> pages = <GetPage<dynamic>>[
+    GetPage(
+      name: AppRoutes.landingMenu,
+      page: () => const NavBarDrawer(),
+      transition: Transition.downToUp,
+    ),
     GetPage(
       name: AppRoutes.landing,
       page: () => const LandingPage(),

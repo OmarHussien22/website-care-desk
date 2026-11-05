@@ -119,8 +119,9 @@ double _lineHeight(TextRole role) {
 
 /// Letter spacing in em (approximated as a fraction of font size).
 double? _letterSpacing(TextRole role, double fontSize) {
-  if (role == TextRole.displayXL || role == TextRole.displayLG)
+  if (role == TextRole.displayXL || role == TextRole.displayLG) {
     return -0.02 * fontSize;
+  }
   if (role.name.startsWith('heading')) return -0.01 * fontSize;
   if (role == TextRole.caption) return 0.02 * fontSize;
   return null; // body / button: 0
@@ -136,7 +137,9 @@ abstract final class AppTextStyles {
     final size = ScreenSizeX.of(context);
     final fontSize = _sizes[role]!.resolveForSize(size);
     return TextStyle(
-      fontFamily: _families[role],
+      fontFamily: Directionality.of(context) == TextDirection.rtl
+          ? 'URW'
+          : _families[role],
       fontSize: fontSize,
       fontWeight: _weights[role],
       height: _lineHeight(role),
